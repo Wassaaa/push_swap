@@ -1,0 +1,17 @@
+{
+	"configurations": [
+	  {
+		"name": "Linux",
+		"includePath": [
+		  "${workspaceFolder}/includes",
+		  "${workspaceFolder}/libft"
+		],
+		"defines": [],
+		"compilerPath": "/usr/bin/gcc",
+		"cStandard": "${default}",
+		"cppStandard": "${default}",
+		"intelliSenseMode": "${default}"
+	  }
+	],
+	"version": 4
+  }
