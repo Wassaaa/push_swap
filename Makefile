@@ -14,7 +14,7 @@ CC				=	gcc
 
 CC_STRICT		=	-Wall -Wextra -Werror
 
-CC_DEBUG		=	-g -fsanitize=leak
+CC_DEBUG		=	-g # -fsanitize=leak
 
 CC_INCLUDES		=	-I $(LIBFT_INCLUDES) -I $(INCLUDES)
 

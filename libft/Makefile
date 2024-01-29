@@ -6,14 +6,14 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/29 16:17:19 by aklein            #+#    #+#              #
-#    Updated: 2024/01/30 00:04:26 by aklein           ###   ########.fr        #
+#    Updated: 2024/01/30 00:33:20 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	libft.a
 OBJ_DIR		=	./obj
 
-CC_DEBUG	=	-g -fsanitize=leak
+CC_DEBUG	=	-g # -fsanitize=leak
 
 SRCS 		=	ft_isalpha.c \
 				ft_isdigit.c \

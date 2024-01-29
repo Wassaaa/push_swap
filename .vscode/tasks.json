@@ -3,7 +3,7 @@
 	"tasks": [
 	  {
 		"type": "cppbuild",
-		"label": "C/C++: gcc build active file",
+		"label": "make re",
 		"command": "/usr/bin/make",
 		"args": ["re"],
 		"options": {

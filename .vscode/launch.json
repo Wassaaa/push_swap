@@ -5,16 +5,19 @@
 	"version": "0.2.0",
 	"configurations": [
 	  {
-		"name": "(gdb) ./push_swap 2 1",
+		"name": "(gdb) ./push_swap args",
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/push_swap",
-		"args": ["2", "1"],
+		"args": [
+			"${input:args}"
+		],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}",
 		"environment": [],
 		"externalConsole": false,
 		"MIMode": "gdb",
+		"preLaunchTask": "make re",
 		"setupCommands": [
 		  {
 			"description": "Enable pretty-printing for gdb",
@@ -23,25 +26,23 @@
 		  }
 		]
 	  },
-  
 	  {
-		"name": "(gdb) ./push_swap 2 1 3 6 5 8",
-		"type": "cppdbg",
+		"type": "lldb",
 		"request": "launch",
+		"name": "(lldb) ./push_swap args",
 		"program": "${workspaceFolder}/push_swap",
-		"args": ["2", "1", "3", "6", "5", "8"],
-		"stopAtEntry": false,
+		"args": ["${input:args}"],
 		"cwd": "${workspaceFolder}",
-		"environment": [],
-		"externalConsole": false,
-		"MIMode": "gdb",
-		"setupCommands": [
-		  {
-			"description": "Enable pretty-printing for gdb",
-			"text": "-enable-pretty-printing",
-			"ignoreFailures": true
-		  }
-		]
-	  }
-	]
+		"preLaunchTask": "make re"
+	},
+	],
+	"inputs": [
+		{
+		  "id": "args",
+		  "type":"promptString",
+		  "description": "args",
+		  "default": "9 5 2 3 4 7 10"
+		},
+	  ]
+
   }
