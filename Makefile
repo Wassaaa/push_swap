@@ -55,6 +55,7 @@ clean:
 
 fclean: clean
 					rm -f $(NAME)
+					rm -rf push_swap.dSYM/
 					make -C libft fclean
 
 re: fclean all
