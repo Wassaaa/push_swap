@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/01/30 17:44:03 by aklein           ###   ########.fr       */
+/*   Updated: 2024/01/30 20:10:39 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@
 
 typedef struct s_stack
 {
-	s_list	*top;
+	t_list	*top;
 }			t_stack;
+
+typedef struct s_input
+{
+	int		*arr;
+	char	*args;
+	int		nr_count;
+}			t_input;
 
 #endif

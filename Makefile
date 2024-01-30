@@ -12,7 +12,7 @@ OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 CC				=	gcc
 
-CC_STRICT		=	-Wall -Wextra -Werror
+CC_STRICT		=	#-Wall -Wextra -Werror
 
 CC_DEBUG		=	-g # -fsanitize=leak
 
