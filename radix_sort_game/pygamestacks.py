@@ -92,7 +92,7 @@ class Info:
             self.high_mid = [3 * n // 4, sorted_numbers[3 * n // 4]]
 
 
-def draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info):
+def draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info, sorted_stack):
     global a_rects, b_rects
     a_rects, b_rects = [], []
     a_y, b_y = 50, 50
@@ -100,6 +100,8 @@ def draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info):
 
     for i, item in enumerate(stack_a.items):
         color = (255, 0, 0) if item == tracked_number else (255, 255, 255)
+        if stack_a.items == sorted_stack:
+            color = (0, 255, 0)
         decimal_text = font.render(f"{item}", True, color)
         binary_text = font.render(f"({item:0{max_bits}b})", True, color)
 
@@ -135,7 +137,7 @@ def main_pygame():
     global stack_a, stack_b, max_bits, a_rects, b_rects
     pygame.init()
 
-    screen = pygame.display.set_mode((1000, 800))
+    screen = pygame.display.set_mode((1400, 1200))
     pygame.display.set_caption("Stack Sorting Simulator")
     font = pygame.font.SysFont("Courier", 36)  # Using a monospaced font
 
@@ -143,7 +145,11 @@ def main_pygame():
     stack_b = Stack()
 
     num_count = 25 #int(input("Enter the number of random numbers to generate (up to 10): "))
-    numbers = [random.randint(1, 99) for _ in range(min(num_count, 50))]
+    #numbers = [random.randint(1, 99) for _ in range(min(num_count, 50))]
+    numbers = [837, 276, 45, 932, 158, 743, 29, 614, 390, 481, 957, 213, 172, 88, 321, 666, 504, 779, 95, 356, 239, 147, 803, 68, 426, 591, 344, 262, 728, 102]
+    #numbers = [5, 2, 3, 4, 1]
+    numbers = numbers[::-1]
+    sorted_stack = sorted(numbers)
     info = Info(numbers)
 
     max_bits = get_max_bits(numbers)
@@ -156,7 +162,7 @@ def main_pygame():
     clock = pygame.time.Clock()
     while True:
         screen.fill((0, 0, 0))
-        draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info)
+        draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info, sorted_stack)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
