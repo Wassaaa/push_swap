@@ -6,19 +6,12 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 02:51:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 16:37:56 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <stdio.h>
-
-int *parse_numbers(t_input *input);
-void quick_sort(int *arr, int start, int end);
-int partition(int *arr, int start, int end);
-t_stack *init_input(t_input *input);
-void print_content(void *content);
-void find_parts(t_parts *p, t_input *input);
 
 int main(int argc, char **argv)
 {
@@ -38,24 +31,81 @@ int main(int argc, char **argv)
 	printf("\n\n");
 	find_parts(&p, &input);
 	quick_sort(input.control, 0, input.nr_count - 1);
-	push_to_b(stack, &input, &p);
-
-	// while (i < input.nr_count)
-	// 	printf("%d\n", input.arr[i++]);
-	// i = 0;
-	// while (i < input.nr_count)
-	// 	printf("%d\n", input.arr[i++]);
-	// printf("%d\n\n", ft_lstsize(a_stack->top));
+	is_sorted(stack->a_top, input.control[p.min]);
+	push_l_to_b(stack, &input, &p);
+	push_h_to_b(stack, &input, &p);
+	sort_bps(stack, &input, &p);
 }
 
-// void find_parts(t_parts *p, t_input *input)
-// {
-// 	p->min = input->arr[0];
-// 	p->low_mid = input->arr[(input->nr_count) / 4];
-// 	p->mid = input->arr[input->nr_count / 2];
-// 	p->high_mid = input->arr[(input->nr_count) * 3 / 4];
-// 	p->max = input->arr[input->nr_count - 1];
-// }
+int	is_sorted(t_list *list, int min)
+{
+	int	current;
+
+	if (*(int *)list->content != min)
+		return (0);
+	current = min;
+	while (list && list->next != NULL)
+	{
+		if (*(int *)list->next->content > current)
+			current = *(int *)list->next->content;
+		else
+			return (0);
+		list = list->next;
+	}
+	return (1);
+}
+
+void	sort_bps(t_stack *stack, t_input *input, t_parts *p)
+{
+	t_list	biggest;
+	int		first;
+	int		second;
+
+	if (is_sorted(stack->a_top, input->control[p->min]))
+		return ;
+	first = *(int *)stack->a_top->content;
+	second = *(int *)stack->a_top->next->content;
+	if (first == input->control[p->max])
+	{
+		ra(stack);
+		ft_putendl_fd("\n\nrotated A", 1);
+		print_current_stacks(stack);
+	}
+	else if (second == input->control[p->max])
+	{
+		rra(stack);
+		ft_putendl_fd("\n\nR-rotated A", 1);
+		print_current_stacks(stack);
+	}
+	first = *(int *)stack->a_top->content;
+	second = *(int *)stack->a_top->next->content;
+	if (first < second)
+		return ;
+	sa(stack);
+	ft_putendl_fd("\n\nswapped A", 1);
+	print_current_stacks(stack);
+}
+
+void	push_h_to_b(t_stack *stack, t_input *input, t_parts *p)
+{
+	while (ft_lstsize(stack->a_top) > 3)
+	{
+		int	a_int_top;
+
+		a_int_top = *(int *)stack->a_top->content;
+		if (is_breakpoint(a_int_top, p, input))
+		{
+			ra(stack);
+			ft_putendl_fd("\n\nrotated A", 1);
+			print_current_stacks(stack);
+			continue ;
+		}
+		pb(stack);
+		ft_putendl_fd("\n\npushed to B", 1);
+		print_current_stacks(stack);
+	}
+}
+
 void find_parts(t_parts *p, t_input *input)
 {
 	p->min = 0;
@@ -76,7 +126,7 @@ int is_breakpoint(int content, t_parts *p, t_input *input)
 	return (0);
 }
 
-void push_to_b(t_stack *stack, t_input *input, t_parts *p)
+void push_l_to_b(t_stack *stack, t_input *input, t_parts *p)
 {
 	int	a_top_int;
 
@@ -86,21 +136,32 @@ void push_to_b(t_stack *stack, t_input *input, t_parts *p)
 		if (is_breakpoint(a_top_int, p, input) || a_top_int > input->control[p->high_mid])
 		{
 			ra(stack);
-			ft_putstr_fd("\n\nA_:", 1);
-			ft_lstiter(stack->a_top, print_content);
-			ft_putstr_fd("\nB_:", 1);
-			ft_lstiter(stack->b_top, print_content);
+			ft_putendl_fd("\n\nrotated A", 1);
+			print_current_stacks(stack);
 			continue ;
 		}
 		pb(stack);
+		ft_putendl_fd("\n\npushed to B", 1);
+		print_current_stacks(stack);
 		if (a_top_int < input->control[p->low_mid])
+		{
+
 			sb(stack);
-		ft_putstr_fd("\n\nA_:", 1);
-		ft_lstiter(stack->a_top, print_content);
-		ft_putstr_fd("\nB_:", 1);
-		ft_lstiter(stack->b_top, print_content);
+			ft_putendl_fd("\n\nswapped B", 1);
+			print_current_stacks(stack);
+		}
+
 	}
 }
+
+void	print_current_stacks(t_stack *stack)
+{
+	ft_putstr_fd("A_:", 1);
+	ft_lstiter(stack->a_top, print_content);
+	ft_putstr_fd("\nB_:", 1);
+	ft_lstiter(stack->b_top, print_content);
+}
+
 void	print_content(void *content)
 {
 	ft_putnbr_fd(*(int *)content, 1);
@@ -121,8 +182,8 @@ t_stack *init_input(t_input *input)
 		while (++i < input->nr_count)
 			ft_lstadd_back(&stack->a_top, ft_lstnew(&input->arr[i]));
 	return (stack);
-		
-	
+
+
 }
 
 size_t	count_digits(int n)

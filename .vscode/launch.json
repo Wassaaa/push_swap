@@ -41,7 +41,7 @@
 		  "id": "args",
 		  "type":"promptString",
 		  "description": "args",
-		  "default": "9 5 2 3 4 7 10"
+		  "default": "9 5 2 3 4 7 10 12 1 6 13 8 20 11 15"
 		},
 	  ]
 
