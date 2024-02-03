@@ -6,6 +6,7 @@ INCLUDES		=	./includes
 M_MAIN			=	./main.c
 
 SRCS			=	push_swap.c\
+					commands.c
 
 
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

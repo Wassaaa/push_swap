@@ -91,8 +91,34 @@ class Info:
             self.low_mid = [n // 4, sorted_numbers[n // 4]]
             self.high_mid = [3 * n // 4, sorted_numbers[3 * n // 4]]
 
+def draw_info_box(screen, info):
+    info_box_width = 300
+    info_box_height = 200
+    info_box_x = screen.get_width() - info_box_width - 10
+    info_box_y = 10
 
-def draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info, sorted_stack):
+    # Draw the info box
+    info_box_rect = pygame.Rect(info_box_x, info_box_y, info_box_width, info_box_height)
+    pygame.draw.rect(screen, (50, 50, 50), info_box_rect)
+
+
+    info_font = pygame.font.SysFont("Arial", 24)
+    line_spacing = 30
+    y_offset = 10
+
+    parts = ['min', 'low_mid', 'mid', 'high_mid', 'max']
+    for part in parts:
+        part_info = getattr(info, part)
+        info_name = info_font.render(f"{part.capitalize()}:", True, (255, 255, 255))
+        info_nrs = info_font.render(f"[{part_info[0]}]{part_info[1]}", True, (255, 255, 255))
+
+        screen.blit(info_name, (info_box_x + 10, info_box_y + y_offset))
+        screen.blit(info_nrs, (info_box_x + 150, info_box_y + y_offset))
+        y_offset += line_spacing
+
+    # Add more lines of text as needed
+
+def draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, sorted_stack):
     global a_rects, b_rects
     a_rects, b_rects = [], []
     a_y, b_y = 50, 50
@@ -122,10 +148,6 @@ def draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info, 
         rect = pygame.Rect(500 + decimal_x, b_y, binary_text.get_width() + binary_x - decimal_x, binary_text.get_height())
         b_rects.append((rect, item))
         b_y += 30
-
-    color = (255, 255, 255)
-    info_text = font.render(f"{info.min}||{info.low_mid}||{info.mid}||{info.high_mid}||{info.max}", True, color)
-    screen.blit(info_text, (0, 10))
 
 def check_click(pos, tracked_number):
     for rect, item in a_rects + b_rects:
@@ -162,7 +184,8 @@ def main_pygame():
     clock = pygame.time.Clock()
     while True:
         screen.fill((0, 0, 0))
-        draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, info, sorted_stack)
+        draw_stacks(screen, font, stack_a, stack_b, max_bits, tracked_number, sorted_stack)
+        draw_info_box(screen, info)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -174,23 +197,32 @@ def main_pygame():
                 if event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_d:
                     if stack_a.items:
                         if stack_a.items[0] == tracked_number:
                             tracked_number = stack_a.items[1] if len(stack_a.items) > 1 else None
                         pb(stack_a, stack_b)
-                elif event.key == pygame.K_LEFT:
+                elif event.key == pygame.K_a:
                     pa(stack_a, stack_b)
                     if tracked_number and not stack_b.items:
                         tracked_number = stack_a.items[0]
-                elif event.key == pygame.K_UP:
+                elif event.key == pygame.K_w:
                     ra(stack_a)
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_s:
                     rra(stack_a)
-                elif event.key == pygame.K_PAGEUP:
+                elif event.key == pygame.K_UP:
                     rb(stack_b)
-                elif event.key == pygame.K_PAGEDOWN:
+                elif event.key == pygame.K_DOWN:
                     rrb(stack_b)
+                elif event.key == pygame.K_LEFT:
+                    sa(stack_a)
+                elif event.key == pygame.K_RIGHT:
+                    sb(stack_b)
+                elif event.key == pygame.K_PAGEUP:
+                    rr(stack_a, stack_b)
+                elif event.key == pygame.K_PAGEDOWN:
+                    rrr(stack_a, stack_b)
+
 
         pygame.display.flip()
         clock.tick(60)

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/01/31 22:09:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 02:51:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void quick_sort(int *arr, int start, int end);
 int partition(int *arr, int start, int end);
 t_stack *init_input(t_input *input);
 void print_content(void *content);
-void find_parts(t_parts *parts, t_input *input);
+void find_parts(t_parts *p, t_input *input);
 
 int main(int argc, char **argv)
 {
 	t_input input;
-	t_stack *a_stack;
-	t_parts parts;
+	t_stack *stack;
+	t_parts p;
 	int		i;
 
 	i = 0;
@@ -33,10 +33,12 @@ int main(int argc, char **argv)
 
 	input.args = argv[1];
 	input.arr = parse_numbers(&input);
-	a_stack = init_input(&input);
-	ft_lstiter(a_stack->top, print_content);
-	quick_sort(input.arr, 0, input.nr_count - 1);
-	find_parts(&parts, &input);
+	stack = init_input(&input);
+	ft_lstiter(stack->a_top, print_content);
+	printf("\n\n");
+	find_parts(&p, &input);
+	quick_sort(input.control, 0, input.nr_count - 1);
+	push_to_b(stack, &input, &p);
 
 	// while (i < input.nr_count)
 	// 	printf("%d\n", input.arr[i++]);
@@ -46,18 +48,63 @@ int main(int argc, char **argv)
 	// printf("%d\n\n", ft_lstsize(a_stack->top));
 }
 
-void find_parts(t_parts *parts, t_input *input)
+// void find_parts(t_parts *p, t_input *input)
+// {
+// 	p->min = input->arr[0];
+// 	p->low_mid = input->arr[(input->nr_count) / 4];
+// 	p->mid = input->arr[input->nr_count / 2];
+// 	p->high_mid = input->arr[(input->nr_count) * 3 / 4];
+// 	p->max = input->arr[input->nr_count - 1];
+// }
+void find_parts(t_parts *p, t_input *input)
 {
-	parts->min = 0;
-	parts->low_mid = (input->nr_count) / 4;
-	parts->mid = input->nr_count / 2;
-	parts->high_mid = (input->nr_count) * 3 / 4;
-	parts->max = input->nr_count - 1;
+	p->min = 0;
+	p->low_mid = (input->nr_count) / 4;
+	p->mid = input->nr_count / 2;
+	p->high_mid = (input->nr_count) * 3 / 4;
+	p->max = input->nr_count - 1;
 }
 
-void print_content(void *content)
+int is_breakpoint(int content, t_parts *p, t_input *input)
 {
-	printf("%d ", *(int *)content);
+	if (content == input->control[p->min])
+		return (1);
+	if (content == input->control[p->mid])
+		return (1);
+	if (content == input->control[p->max])
+		return (1);
+	return (0);
+}
+
+void push_to_b(t_stack *stack, t_input *input, t_parts *p)
+{
+	int	a_top_int;
+
+	while (ft_lstsize(stack->a_top) > p->max - p->high_mid + 2)
+	{
+		a_top_int = *(int *)stack->a_top->content;
+		if (is_breakpoint(a_top_int, p, input) || a_top_int > input->control[p->high_mid])
+		{
+			ra(stack);
+			ft_putstr_fd("\n\nA_:", 1);
+			ft_lstiter(stack->a_top, print_content);
+			ft_putstr_fd("\nB_:", 1);
+			ft_lstiter(stack->b_top, print_content);
+			continue ;
+		}
+		pb(stack);
+		if (a_top_int < input->control[p->low_mid])
+			sb(stack);
+		ft_putstr_fd("\n\nA_:", 1);
+		ft_lstiter(stack->a_top, print_content);
+		ft_putstr_fd("\nB_:", 1);
+		ft_lstiter(stack->b_top, print_content);
+	}
+}
+void	print_content(void *content)
+{
+	ft_putnbr_fd(*(int *)content, 1);
+	ft_putchar_fd(' ', 1);
 }
 
 t_stack *init_input(t_input *input)
@@ -69,10 +116,10 @@ t_stack *init_input(t_input *input)
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
-	stack->top = NULL;
+	stack->a_top = NULL;
 	if (input->arr && input->nr_count > 0)
 		while (++i < input->nr_count)
-			ft_lstadd_back(&stack->top, ft_lstnew(&input->arr[i]));
+			ft_lstadd_back(&stack->a_top, ft_lstnew(&input->arr[i]));
 	return (stack);
 		
 	
@@ -110,23 +157,27 @@ int *parse_numbers(t_input *input)
 {
 	int			i;
 	int			*arr;
-	char	*n_str;
+	int			*control;
+	char		*n_str;
 
 	n_str = input->args;
 	i = 0;
 	input->nr_count = count_nrs(input->args);
 	arr = malloc(input->nr_count * sizeof(int));
-	if (!arr)
+	control = malloc(input->nr_count * sizeof(int));
+	if (!arr || !control)
 		return (NULL);
 	while (input->nr_count > i)
 	{
 		if (ft_isdigit(*n_str))
 		{
 			arr[i] = ft_atoi(n_str);
+			control[i] = ft_atoi(n_str);
 			n_str += count_digits(arr[i]) + 1;
 		}
 		i++;
 	}
+	input->control = control;
 	return (arr);
 }
 
