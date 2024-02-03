@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 16:30:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 19:21:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,34 @@ typedef struct s_input
 	int		*control;
 	int		nr_count;
 }			t_input;
+
+typedef struct s_rot
+{
+	int		ra;
+	int		rra;
+	int		rb;
+	int		rrb;
+	int		rr;
+	int		rrr;
+	int		cost;
+}			t_rot;
+
 //to be changed
 int		*parse_numbers(t_input *input);
 t_stack	*init_input(t_input *input);
 void	find_parts(t_parts *p, t_input *input);
 void	print_content(void *content);
 void	print_current_stacks(t_stack *stack);
+
+//rotations-finding
+t_rot	find_best_rotation(t_stack *stack, t_input *input, t_parts *p);
+int		find_a_spot(t_stack *stack);
+t_list	*node_at_index(t_list *list, int a_index);
+void	both_up(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
+void	both_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
+void	up_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
+void	down_up(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
+void	set_cost(t_rot *rot);
 
 //quick-sort
 void	quick_sort(int *arr, int start, int end);

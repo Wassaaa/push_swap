@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 16:37:56 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 19:27:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 int main(int argc, char **argv)
 {
-	t_input input;
-	t_stack *stack;
-	t_parts p;
+	t_input	input;
+	t_stack	*stack;
+	t_parts	p;
+	t_rot	best;
 	int		i;
 
 	i = 0;
-	// printf("%d\n", argc);
-	// printf("%s\n", argv[1]);
-
 	input.args = argv[1];
 	input.arr = parse_numbers(&input);
 	stack = init_input(&input);
@@ -35,6 +33,76 @@ int main(int argc, char **argv)
 	push_l_to_b(stack, &input, &p);
 	push_h_to_b(stack, &input, &p);
 	sort_bps(stack, &input, &p);
+	best = find_best_rotation(stack, &input, &p);
+
+}
+//up - 0
+//down - 1
+//up-down - 2
+//down-up - 3
+t_list	*node_at_index(t_list *list, int a_index)
+{
+	while (a_index--)
+		list = list->next;
+	return (list);
+}
+
+int	find_a_spot(t_stack *stack)
+{
+	int		a_top;
+	int		b_top;
+	int		a_bot;
+	int		a_index;
+	t_list	*current;
+
+	b_top = *(int *)stack->b_top->content;
+	a_bot = *(int *)ft_lstlast(stack->a_top)->content;
+	a_index = 0;
+	while (42)
+
+	{
+		current = node_at_index(stack->a_top, a_index);
+		a_top = *(int *)current->content;
+		if (a_top < b_top)
+			{
+				a_index++;
+				a_bot = a_top;
+				continue ;
+			}
+		if (a_top > b_top)
+		{
+			if (a_bot > b_top)
+			{
+				a_index++;
+				a_bot = a_top;
+				continue ;
+			}
+		}
+		return (a_index);
+	}
+}
+
+void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
+{
+
+	ft_bzero(rot, sizeof(*rot) * 4);
+	both_up(stack, a_idx, b_idx, rot);
+	both_down(stack, a_idx, b_idx, rot);
+	up_down(stack, a_idx, b_idx, rot);
+	down_up(stack, a_idx, b_idx, rot);
+
+}
+
+t_rot	find_best_rotation(t_stack *stack, t_input *input, t_parts *p)
+{
+	int		a_index;
+	int		b_index;
+	t_rot	rot[4];
+
+	b_index = 0;
+	a_index = find_a_spot(stack);
+	get_rotations(stack, a_index, b_index, rot);
+
 }
 
 int	is_sorted(t_list *list, int min)
