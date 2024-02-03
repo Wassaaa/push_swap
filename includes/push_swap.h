@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 02:30:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 02:54:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_input
 void	ra(t_stack *stack);
 void	rb(t_stack *stack);
 void	pb(t_stack *stack);
+void	sb(t_stack *stack);
 t_list	*pluck_first(t_list **lst);
 void push_to_b(t_stack *stack, t_input *input, t_parts *p);
 #endif
