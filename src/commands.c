@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 00:10:54 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 19:59:46 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 20:31:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,6 @@ void	ra(t_stack *stack)
 	ft_lstadd_back(&stack->a_top, plucked);
 }
 
-void	rra(t_stack *stack)
-{
-	t_list	*plucked;
-
-	if (stack == NULL || stack->a_top == NULL || stack->a_top->next == NULL)
-		return ;
-	plucked = pluck_last(&stack->a_top);
-	ft_lstadd_front(&stack->a_top, plucked);
-}
-
 void	rb(t_stack *stack)
 {
 	t_list	*plucked;
@@ -76,6 +66,38 @@ void	rb(t_stack *stack)
 	plucked = pluck_first(&stack->b_top);
 	stack->b_top = next;
 	ft_lstadd_back(&stack->b_top, plucked);
+}
+
+void	rr(t_stack *stack)
+{
+	ra(stack);
+	rb(stack);
+}
+
+void	rra(t_stack *stack)
+{
+	t_list	*plucked;
+
+	if (stack == NULL || stack->a_top == NULL || stack->a_top->next == NULL)
+		return ;
+	plucked = pluck_last(&stack->a_top);
+	ft_lstadd_front(&stack->a_top, plucked);
+}
+
+void	rrb(t_stack *stack)
+{
+	t_list	*plucked;
+
+	if (stack == NULL || stack->b_top == NULL || stack->b_top->next == NULL)
+		return ;
+	plucked = pluck_last(&stack->b_top);
+	ft_lstadd_front(&stack->b_top, plucked);
+}
+
+void	rrr(t_stack *stack)
+{
+	rra(stack);
+	rrb(stack);
 }
 
 void	pb(t_stack *stack)

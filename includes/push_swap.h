@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 19:59:59 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 21:01:58 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	both_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
 void	up_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
 void	down_up(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
 void	set_cost(t_rot *rot);
+void	execute_best(t_rot best, t_stack *stack);
+void	finish_rotations(t_stack *stack, t_input *input);
 
 //quick-sort
 void	quick_sort(int *arr, int start, int end);
@@ -74,7 +76,10 @@ void	pa(t_stack *stack);
 void	pb(t_stack *stack);
 void	ra(t_stack *stack);
 void	rb(t_stack *stack);
+void	rr(t_stack *stack);
 void	rra(t_stack *stack);
+void	rrb(t_stack *stack);
+void	rrr(t_stack *stack);
 void	sa(t_stack *stack);
 void	sb(t_stack *stack);
 int		is_sorted(t_list *list, int min);

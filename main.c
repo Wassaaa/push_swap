@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 20:09:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 21:22:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,58 @@ int main(int argc, char **argv)
 	while (stack->b_top != NULL)
 	{
 		best = find_best_rotation(stack, &input, &p);
+		execute_best(best, stack);
 		pa(stack);
-		ft_putendl_fd("\n\npushed to A", 1);
 		print_current_stacks(stack);
 	}
+	finish_rotations(stack, &input);
+	print_current_stacks(stack);
 
+
+}
+
+void	finish_rotations(t_stack *stack, t_input *input)
+{
+	int		i;
+	int		a_n;
+	t_rot	rot;
+	t_list	*temp;
+
+	i = 0;
+	ft_bzero(&rot, sizeof(rot));
+	a_n = ft_lstsize(stack->a_top);
+	temp = stack->a_top;
+	while (temp->next != NULL)
+	{
+		if (*(int *)temp->content != input->control[0])
+		{
+			i++;
+			temp = temp->next;
+			continue ;
+		}
+		break ;
+	}
+	if (i > a_n - i)
+		rot.rra = a_n - i;
+	else
+		rot.ra = i;
+	execute_best(rot, stack);
+}
+
+void	execute_best(t_rot best, t_stack *stack)
+{
+	while (best.ra--)
+		ra(stack);
+	while (best.rb--)
+		rb(stack);
+	while (best.rr--)
+		rr(stack);
+	while (best.rra--)
+		rra(stack);
+	while (best.rrb--)
+		rrb(stack);
+	while (best.rrr--)
+		rrr(stack);
 }
 //both up - 0
 //both down - 1
