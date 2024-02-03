@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 19:27:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 20:09:35 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,17 @@ int main(int argc, char **argv)
 	push_l_to_b(stack, &input, &p);
 	push_h_to_b(stack, &input, &p);
 	sort_bps(stack, &input, &p);
-	best = find_best_rotation(stack, &input, &p);
+	while (stack->b_top != NULL)
+	{
+		best = find_best_rotation(stack, &input, &p);
+		pa(stack);
+		ft_putendl_fd("\n\npushed to A", 1);
+		print_current_stacks(stack);
+	}
 
 }
-//up - 0
-//down - 1
+//both up - 0
+//both down - 1
 //up-down - 2
 //down-up - 3
 t_list	*node_at_index(t_list *list, int a_index)
@@ -98,11 +104,35 @@ t_rot	find_best_rotation(t_stack *stack, t_input *input, t_parts *p)
 	int		a_index;
 	int		b_index;
 	t_rot	rot[4];
+	t_rot	best;
+	t_rot	current;
+	int		i;
+	int		b_size;
 
 	b_index = 0;
 	a_index = find_a_spot(stack);
 	get_rotations(stack, a_index, b_index, rot);
-
+	best = rot[0];
+	b_size = ft_lstsize(stack->b_top);
+	while (b_index < b_size)
+	{
+		i = 0;
+		while (i < 4)
+		{
+			current = rot[i++];
+			if (current.cost < best.cost)
+				best = current;
+		}
+		// if (best.cost <= 1)
+		// 	return (best);
+		ft_putstr_fd("\n@", 1);
+		ft_putnbr_fd(b_index, 1);
+		ft_putstr_fd(" current best: ", 1);
+		ft_putnbr_fd(best.cost, 1);
+		b_index++;
+		get_rotations(stack, a_index, b_index, rot);
+	}
+	return (best);
 }
 
 int	is_sorted(t_list *list, int min)

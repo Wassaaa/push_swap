@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 19:21:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 19:59:59 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	quick_sort(int *arr, int start, int end);
 int		partition(int *arr, int start, int end);
 
 //push-swap
+void	pa(t_stack *stack);
 void	pb(t_stack *stack);
 void	ra(t_stack *stack);
 void	rb(t_stack *stack);

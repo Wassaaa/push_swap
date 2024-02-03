@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 00:10:54 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 16:41:03 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/03 19:59:46 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,18 @@ void	pb(t_stack *stack)
 	stack->a_top = next;
 	ft_lstadd_front(&stack->b_top, plucked);
 	stack->b_top = plucked;
+}
+
+void	pa(t_stack *stack)
+{
+	t_list	*plucked;
+	t_list	*next;
+
+	next = stack->b_top->next;
+	plucked = pluck_first(&stack->b_top);
+	stack->b_top = next;
+	ft_lstadd_front(&stack->a_top, plucked);
+	stack->a_top = plucked;
 }
 
 void	sb(t_stack *stack)
