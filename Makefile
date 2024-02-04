@@ -17,7 +17,6 @@ SRCS			=	args.c\
 					output.c\
 					parts.c\
 					possible_rotations.c\
-					push_swap.c\
 					push_to_a.c\
 					push_to_b.c\
 					quick_sort.c\
