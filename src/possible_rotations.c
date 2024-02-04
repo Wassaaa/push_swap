@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:00:57 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 19:24:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 16:29:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_cost(t_rot *rot)
 	rot->cost = rot->ra + rot->rb + rot->rr + rot->rra + rot->rrb + rot->rrr;
 }
 
-void	both_up(t_stack *stack,int a_idx, int b_idx, t_rot *rot)
+void	both_up(int a_idx, int b_idx, t_rot *rot)
 {
 	rot[0].ra = a_idx;
 	rot[0].rb = b_idx;

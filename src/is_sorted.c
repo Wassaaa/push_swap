@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_sorted.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:50:44 by aklein           ###   ########.fr       */
+/*   Created: 2024/02/04 18:43:51 by aklein            #+#    #+#             */
+/*   Updated: 2024/02/04 18:43:59 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-#include <stdio.h>
 
-int main(int argc, char **argv)
+int	is_sorted(t_list *list, int min)
 {
-	t_input	input;
-	t_stack	*stack;
-	t_parts	p;
+	int	current;
 
-	validate_args(argc, argv, &input);
-	stack = construct_stack(&input);
-	find_parts(&p, &input);
-	quick_sort(input.control, 0, input.nr_count - 1);
-	if (is_sorted(stack->a_top, input.control[p.min]))
+	if (*(int *)list->content != min)
 		return (0);
-	push_l_to_b(stack, &input, &p);
-	push_h_to_b(stack, &input, &p);
-	sort_bps(stack, &input, &p);
-	push_b_to_a(stack, &input);
+	current = min;
+	while (list && list->next != NULL)
+	{
+		if (*(int *)list->next->content > current)
+			current = *(int *)list->next->content;
+		else
+			return (0);
+		list = list->next;
+	}
+	return (1);
 }

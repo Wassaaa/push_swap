@@ -5,9 +5,23 @@ INCLUDES		=	./includes
 
 M_MAIN			=	./main.c
 
-SRCS			=	push_swap.c\
+SRCS			=	args.c\
 					commands.c\
+					debug_prints.c\
+					error.c\
+					execute.c\
+					find_rotations.c\
+					ft_atol.c\
+					is_sorted.c\
+					output.c\
+					parts.c\
 					possible_rotations.c\
+					push_swap.c\
+					push_to_a.c\
+					push_to_b.c\
+					quick_sort.c\
+					single_string_args.c\
+					stack.c\
 
 
 
@@ -15,9 +29,9 @@ OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 CC				=	gcc
 
-CC_STRICT		=	#-Wall -Wextra -Werror
+CC_STRICT		=	-Wall -Wextra -Werror
 
-CC_DEBUG		=	-g # -fsanitize=leak
+CC_DEBUG		=	-g #-fsanitize=leak
 
 CC_INCLUDES		=	-I $(LIBFT_INCLUDES) -I $(INCLUDES)
 

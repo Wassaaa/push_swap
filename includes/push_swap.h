@@ -6,13 +6,30 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 21:01:58 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 19:05:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
 # include <libft.h>
+
+# define SHOW_STACKS 1
+
+# define PB	"pb"
+# define PA "pa"
+
+# define RA "ra"
+# define RB "rb"
+# define RR "rr"
+
+# define RRA "rra"
+# define RRB "rrb"
+# define RRR "rrr"
+
+# define SA "sa"
+# define SB "sb"
 
 typedef struct s_stack
 {
@@ -48,28 +65,32 @@ typedef struct s_rot
 	int		cost;
 }			t_rot;
 
+
+void	validate_args(int argc, char **argv, t_input *input);
+long	ft_atol(const char *str);
+void	crash();
+
 //to be changed
-int		*parse_numbers(t_input *input);
-t_stack	*init_input(t_input *input);
+void	parse_numbers(t_input *input);
+t_stack	*construct_stack(t_input *input);
 void	find_parts(t_parts *p, t_input *input);
 void	print_content(void *content);
 void	print_current_stacks(t_stack *stack);
+void	print_output(char *msg, t_stack *stack);
 
 //rotations-finding
-t_rot	find_best_rotation(t_stack *stack, t_input *input, t_parts *p);
-int		find_a_spot(t_stack *stack);
-t_list	*node_at_index(t_list *list, int a_index);
-void	both_up(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
-void	both_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
-void	up_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
-void	down_up(t_stack *stack,int a_idx, int b_idx, t_rot *rot);
+t_rot	find_best_rotation(t_stack *stack);
+void	both_up(int a_idx, int b_idx, t_rot *rot);
+void	both_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
+void	up_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
+void	down_up(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void	set_cost(t_rot *rot);
 void	execute_best(t_rot best, t_stack *stack);
+void	best_reverse(t_rot best, t_stack *stack);
 void	finish_rotations(t_stack *stack, t_input *input);
 
 //quick-sort
 void	quick_sort(int *arr, int start, int end);
-int		partition(int *arr, int start, int end);
 
 //push-swap
 void	pa(t_stack *stack);
@@ -84,8 +105,8 @@ void	sa(t_stack *stack);
 void	sb(t_stack *stack);
 int		is_sorted(t_list *list, int min);
 void	sort_bps(t_stack *stack, t_input *input, t_parts *p);
-int		is_breakpoint(int content, t_parts *p, t_input *input);
 t_list	*pluck_first(t_list **lst);
 void	push_l_to_b(t_stack *stack, t_input *input, t_parts *p);
 void	push_h_to_b(t_stack *stack, t_input *input, t_parts *p);
+void	push_b_to_a(t_stack *stack, t_input *input);
 #endif

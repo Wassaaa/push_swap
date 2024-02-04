@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   debug_prints.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:50:44 by aklein           ###   ########.fr       */
+/*   Created: 2024/02/04 18:29:17 by aklein            #+#    #+#             */
+/*   Updated: 2024/02/04 18:29:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-#include <stdio.h>
 
-int main(int argc, char **argv)
+void	print_current_stacks(t_stack *stack)
 {
-	t_input	input;
-	t_stack	*stack;
-	t_parts	p;
+	ft_putstr_fd("A_: ", 1);
+	ft_lstiter(stack->a_top, print_content);
+	ft_putstr_fd("\nB_: ", 1);
+	ft_lstiter(stack->b_top, print_content);
+	ft_putstr_fd("\n\n", 1);
+}
 
-	validate_args(argc, argv, &input);
-	stack = construct_stack(&input);
-	find_parts(&p, &input);
-	quick_sort(input.control, 0, input.nr_count - 1);
-	if (is_sorted(stack->a_top, input.control[p.min]))
-		return (0);
-	push_l_to_b(stack, &input, &p);
-	push_h_to_b(stack, &input, &p);
-	sort_bps(stack, &input, &p);
-	push_b_to_a(stack, &input);
+void	print_content(void *content)
+{
+	ft_putnbr_fd(*(int *)content, 1);
+	ft_putchar_fd(' ', 1);
 }
