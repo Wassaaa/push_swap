@@ -6,14 +6,14 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 20:18:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 00:19:49 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <limits.h>
 
-static int	is_unique(t_input *input, int nb, int index)
+int	is_unique(t_input *input, int nb, int index)
 {
 	int i;
 
@@ -25,7 +25,6 @@ static int	is_unique(t_input *input, int nb, int index)
 		i++;
 	}
 	return (1);
-
 }
 
 static void	arg_per_nr(int argc, char **argv, t_input *input)
@@ -62,6 +61,6 @@ void	validate_args(int argc, char **argv, t_input *input)
 	else
 	{
 		input->args = argv[1];
-		parse_numbers(input);
+		one_arg(input);
 	}
 }

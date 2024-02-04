@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 21:12:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 00:12:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <libft.h>
+# include <limits.h>
 
 # define SHOW_STACKS 0
 
@@ -68,6 +69,10 @@ typedef struct s_rot
 	int		cost;
 }			t_rot;
 
+void	one_arg(t_input *input);
+void	validate_format(char *str, t_input *input);
+size_t	count_digits(int n);
+int		is_unique(t_input *input, int nb, int index);
 
 void	validate_args(int argc, char **argv, t_input *input);
 long	ft_atol(const char *str);

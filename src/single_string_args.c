@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 20:18:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 00:16:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static size_t	count_digits(int n)
+size_t	count_digits(int n)
 {
 	size_t	digits;
 
@@ -26,46 +26,61 @@ static size_t	count_digits(int n)
 	return (digits);
 }
 
-static int	count_nrs(char *n_str)
+void	validate_format(char *str, t_input *input)
 {
-	int	counter;
+	int	number_length;
+	int	nr_count;
 
-	counter = 0;
-	if (*n_str == '\0')
-		return (0);
-	while(*n_str)
+	nr_count = 0;
+	while (*str)
 	{
-		if (!ft_isdigit(*n_str))
-			counter++;
-		n_str++;
+		number_length = 0;
+		if (!ft_isdigit(*str))
+			crash(FAIL);
+		while (ft_isdigit(*str))
+		{
+			number_length++;
+			if (number_length > 11)
+				crash(FAIL);
+			str++;
+		}
+		if (*str != ' ' && *str != '\0')
+			crash(FAIL);
+		if (*str != '\0')
+			str++;
+		nr_count++;
 	}
-	return (counter + 1);
+	input->nr_count = nr_count;
 }
 
-void parse_numbers(t_input *input)
+void	one_arg(t_input *input)
 {
-	int			i;
-	int			*arr;
-	int			*control;
-	char		*n_str;
+	validate_format(input->args, input);
+	parse_numbers(input);
+}
 
-	n_str = input->args;
+void	parse_numbers(t_input *input)
+{
+	int		i;
+	char	*n_str;
+	long	nb;
+
 	i = 0;
-	input->nr_count = count_nrs(input->args);
-	arr = ft_calloc(input->nr_count, sizeof(int));
-	control = ft_calloc(input->nr_count, sizeof(int));
-	if (!arr || !control)
+	n_str = input->args;
+	input->arr = ft_calloc(input->nr_count, sizeof(int));
+	input->control = ft_calloc(input->nr_count, sizeof(int));
+	if (!input->arr || !input->control)
 		crash(FAIL);
 	while (input->nr_count > i)
 	{
-		if (ft_isdigit(*n_str))
-		{
-			arr[i] = ft_atoi(n_str);
-			control[i] = ft_atoi(n_str);
-			n_str += count_digits(arr[i]) + 1;
-		}
+		nb = ft_atol(n_str);
+		if (nb > INT_MAX || nb < INT_MIN)
+			crash(FAIL);
+		if (!is_unique(input, nb, i))
+			crash(FAIL);
+		input->arr[i] = nb;
+		input->control[i] = nb;
+		n_str += count_digits(input->arr[i]) + 1;
 		i++;
 	}
-	input->control = control;
-	input->arr = arr;
 }

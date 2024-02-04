@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 21:00:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 00:10:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	crash(int err)
 {
+	ft_putendl_fd("Error", 2);
 	exit(err);
 }
