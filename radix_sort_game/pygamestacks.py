@@ -170,6 +170,7 @@ def main_pygame():
     #numbers = [random.randint(1, 99) for _ in range(min(num_count, 50))]
     #numbers = [837, 276, 45, 932, 158, 743, 29, 614, 390, 481, 957, 213, 172, 88, 321, 666, 504, 779, 95, 356, 239, 147, 803, 68, 426, 591, 344, 262, 728, 102]
     numbers = [9, 5, 2, 3, 4, 7, 10, 12, 1, 6, 13, 8, 20, 11, 15]
+    #numbers = [1, 5]
     numbers = numbers[::-1]
     sorted_stack = sorted(numbers)
     info = Info(numbers)

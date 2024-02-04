@@ -6,27 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:42:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:39:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	push_b_to_a(t_stack *stack, t_input *input)
-{
-	t_rot	best;
-
-	while (stack->b_top != NULL)
-	{
-		best = find_best_rotation(stack);
-		execute_best(best, stack);
-		pa(stack);
-		print_output(PA, stack);
-	}
-	finish_rotations(stack, input);
-}
-
-void	finish_rotations(t_stack *stack, t_input *input)
+static void	finish_rotations(t_stack *stack, t_input *input)
 {
 	int		i;
 	int		a_n;
@@ -53,3 +39,18 @@ void	finish_rotations(t_stack *stack, t_input *input)
 		rot.ra = i;
 	execute_best(rot, stack);
 }
+
+void	push_b_to_a(t_stack *stack, t_input *input)
+{
+	t_rot	best;
+
+	while (stack->b_top != NULL)
+	{
+		best = find_best_rotation(stack);
+		execute_best(best, stack);
+		pa(stack, 1);
+	}
+	finish_rotations(stack, input);
+}
+
+

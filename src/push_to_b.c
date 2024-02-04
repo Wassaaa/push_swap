@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:39:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:41:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:43:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,14 @@ void	push_l_to_b(t_stack *stack, t_input *input, t_parts *p)
 		a_top_int = *(int *)stack->a_top->content;
 		if (is_breakpoint(a_top_int, p, input) || a_top_int > input->control[p->high_mid])
 		{
-			ra(stack);
-			print_output(RA, stack);
+			ra(stack, 1);
 			continue ;
 		}
-		pb(stack);
-		print_output(PB, stack);
+		pb(stack, 1);
 		if (a_top_int < input->control[p->low_mid])
 		{
 
-			sb(stack);
-			print_output(SB, stack);
+			sb(stack, 1);
 		}
 
 	}
@@ -57,16 +54,14 @@ void	push_h_to_b(t_stack *stack, t_input *input, t_parts *p)
 		a_int_top = *(int *)stack->a_top->content;
 		if (is_breakpoint(a_int_top, p, input))
 		{
-			ra(stack);
-			print_output(RA, stack);
+			ra(stack, 1);
 			continue ;
 		}
-		pb(stack);
-		print_output(PB, stack);
+		pb(stack, 1);
 	}
 }
 
-void	sort_bps(t_stack *stack, t_input *input, t_parts *p)
+void	sort_three(t_stack *stack, t_input *input, t_parts *p)
 {
 	int		first;
 	int		second;
@@ -76,19 +71,12 @@ void	sort_bps(t_stack *stack, t_input *input, t_parts *p)
 	first = *(int *)stack->a_top->content;
 	second = *(int *)stack->a_top->next->content;
 	if (first == input->control[p->max])
-	{
-		ra(stack);
-		print_output(RA, stack);
-	}
+		ra(stack, 1);
 	else if (second == input->control[p->max])
-	{
-		rra(stack);
-		print_output(RRA, stack);
-	}
+		rra(stack, 1);
 	first = *(int *)stack->a_top->content;
 	second = *(int *)stack->a_top->next->content;
 	if (first < second)
 		return ;
-	sa(stack);
-	print_output(SA, stack);
+	sa(stack, 1);
 }

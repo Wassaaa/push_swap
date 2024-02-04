@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:43:01 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:43:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:32:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,15 @@
 void	execute_best(t_rot best, t_stack *stack)
 {
 	while (best.ra--)
-	{
-		ra(stack);
-		print_output(RA, stack);
-	}
+		ra(stack, 1);
 	while (best.rb--)
-	{
-		rb(stack);
-		print_output(RB, stack);
-	}
+		rb(stack, 1);
 	while (best.rr--)
-	{
-		rr(stack);
-		print_output(RR, stack);
-	}
-	best_reverse(best, stack);
-}
-
-void	best_reverse(t_rot best, t_stack *stack)
-{
+		rr(stack, 1);
 	while (best.rra--)
-	{
-		rra(stack);
-		print_output(RRA, stack);
-	}
+		rra(stack, 1);
 	while (best.rrb--)
-	{
-		rrb(stack);
-		print_output(RRB, stack);
-	}
+		rrb(stack, 1);
 	while (best.rrr--)
-	{
-		rrr(stack);
-		print_output(RRR, stack);
-	}
+		rrr(stack, 1);
 }

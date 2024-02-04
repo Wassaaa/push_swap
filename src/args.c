@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:58:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:18:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ static void	arg_per_nr(int argc, char **argv, t_input *input)
 	while (i < input->nr_count)
 	{
 		if (ft_strlen(argv[i + 1]) > 11)
-			crash();
+			crash(FAIL);
 		nb = ft_atol(argv[i + 1]);
 		if (nb > INT_MAX || nb < INT_MIN)
-			crash();
+			crash(FAIL);
 		if (!is_unique(input, nb, i))
-			crash();
+			crash(FAIL);
 		input->arr[i] = (int)nb;
 		input->control[i] = (int)nb;
 		i++;
@@ -56,7 +56,7 @@ static void	arg_per_nr(int argc, char **argv, t_input *input)
 void	validate_args(int argc, char **argv, t_input *input)
 {
 	if (argc < 2)
-		return ;
+		crash(FAIL);
 	if (argc > 2)
 		arg_per_nr(argc, argv, input);
 	else

@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:58:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 21:00:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	crash()
+void	crash(int err)
 {
-	exit(1);
+	exit(err);
 }

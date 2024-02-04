@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:50:44 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:20:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int main(int argc, char **argv)
 	quick_sort(input.control, 0, input.nr_count - 1);
 	if (is_sorted(stack->a_top, input.control[p.min]))
 		return (0);
+	if (input.nr_count <= 5)
+		handle_less(stack, &input, &p);
 	push_l_to_b(stack, &input, &p);
 	push_h_to_b(stack, &input, &p);
-	sort_bps(stack, &input, &p);
+	sort_three(stack, &input, &p);
 	push_b_to_a(stack, &input);
 }

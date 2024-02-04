@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 00:10:54 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/03 20:31:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:38:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_list	*pluck_last(t_list **lst)
 	return (temp);
 }
 
-void	ra(t_stack *stack)
+void	ra(t_stack *stack, int print)
 {
 	t_list	*plucked;
 	t_list	*next;
@@ -53,9 +53,11 @@ void	ra(t_stack *stack)
 	plucked = pluck_first(&stack->a_top);
 	stack->a_top = next;
 	ft_lstadd_back(&stack->a_top, plucked);
+	if (print)
+		print_output(RA, stack);
 }
 
-void	rb(t_stack *stack)
+void	rb(t_stack *stack, int print)
 {
 	t_list	*plucked;
 	t_list	*next;
@@ -66,15 +68,19 @@ void	rb(t_stack *stack)
 	plucked = pluck_first(&stack->b_top);
 	stack->b_top = next;
 	ft_lstadd_back(&stack->b_top, plucked);
+	if (print)
+		print_output(RB, stack);
 }
 
-void	rr(t_stack *stack)
+void	rr(t_stack *stack, int print)
 {
-	ra(stack);
-	rb(stack);
+	ra(stack, 0);
+	rb(stack, 0);
+	if (print)
+		print_output(RR, stack);
 }
 
-void	rra(t_stack *stack)
+void	rra(t_stack *stack, int print)
 {
 	t_list	*plucked;
 
@@ -82,9 +88,11 @@ void	rra(t_stack *stack)
 		return ;
 	plucked = pluck_last(&stack->a_top);
 	ft_lstadd_front(&stack->a_top, plucked);
+	if (print)
+		print_output(RRA, stack);
 }
 
-void	rrb(t_stack *stack)
+void	rrb(t_stack *stack, int print)
 {
 	t_list	*plucked;
 
@@ -92,15 +100,19 @@ void	rrb(t_stack *stack)
 		return ;
 	plucked = pluck_last(&stack->b_top);
 	ft_lstadd_front(&stack->b_top, plucked);
+	if (print)
+		print_output(RRB, stack);
 }
 
-void	rrr(t_stack *stack)
+void	rrr(t_stack *stack, int print)
 {
-	rra(stack);
-	rrb(stack);
+	rra(stack, 0);
+	rrb(stack, 0);
+	if (print)
+		print_output(RRR, stack);
 }
 
-void	pb(t_stack *stack)
+void	pb(t_stack *stack, int print)
 {
 	t_list	*plucked;
 	t_list	*next;
@@ -110,9 +122,11 @@ void	pb(t_stack *stack)
 	stack->a_top = next;
 	ft_lstadd_front(&stack->b_top, plucked);
 	stack->b_top = plucked;
+	if (print)
+		print_output(PB, stack);
 }
 
-void	pa(t_stack *stack)
+void	pa(t_stack *stack, int print)
 {
 	t_list	*plucked;
 	t_list	*next;
@@ -122,24 +136,11 @@ void	pa(t_stack *stack)
 	stack->b_top = next;
 	ft_lstadd_front(&stack->a_top, plucked);
 	stack->a_top = plucked;
+	if (print)
+		print_output(PA, stack);
 }
 
-void	sb(t_stack *stack)
-{
-	t_list	*first;
-	t_list	*second;
-
-	if (stack == NULL || stack->b_top == NULL)
-		return ;
-	if (stack->b_top->next == NULL)
-		return ;
-	first = pluck_first(&stack->b_top);
-	second = pluck_first(&stack->b_top);
-	ft_lstadd_front(&stack->b_top, first);
-	ft_lstadd_front(&stack->b_top, second);
-}
-
-void	sa(t_stack *stack)
+void	sa(t_stack *stack, int print)
 {
 	t_list	*first;
 	t_list	*second;
@@ -152,4 +153,23 @@ void	sa(t_stack *stack)
 	second = pluck_first(&stack->a_top);
 	ft_lstadd_front(&stack->a_top, first);
 	ft_lstadd_front(&stack->a_top, second);
+	if (print)
+		print_output(SA, stack);
+}
+
+void	sb(t_stack *stack, int print)
+{
+	t_list	*first;
+	t_list	*second;
+
+	if (stack == NULL || stack->b_top == NULL)
+		return ;
+	if (stack->b_top->next == NULL)
+		return ;
+	first = pluck_first(&stack->b_top);
+	second = pluck_first(&stack->b_top);
+	ft_lstadd_front(&stack->b_top, first);
+	ft_lstadd_front(&stack->b_top, second);
+	if (print)
+		print_output(SB, stack);
 }

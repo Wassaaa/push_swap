@@ -12,6 +12,7 @@ SRCS			=	args.c\
 					execute.c\
 					find_rotations.c\
 					ft_atol.c\
+					handle_less_args.c\
 					is_sorted.c\
 					output.c\
 					parts.c\

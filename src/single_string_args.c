@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 19:04:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:18:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void parse_numbers(t_input *input)
 	arr = ft_calloc(input->nr_count, sizeof(int));
 	control = ft_calloc(input->nr_count, sizeof(int));
 	if (!arr || !control)
-		crash();
+		crash(FAIL);
 	while (input->nr_count > i)
 	{
 		if (ft_isdigit(*n_str))
