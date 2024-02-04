@@ -64,6 +64,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME):
 					$(CC_FULL) $(M_MAIN) $(M_ARCHIVES) -o $(NAME)
+				
+tests: $(NAME)
+	@echo "Generating $(if $(filter-out $@,$(MAKECMDGOALS)), $(filter-out $@,$(MAKECMDGOALS)), 100) random numbers..."
+	@args=`shuf -i 1-1000 -n $(if $(filter-out $@,$(MAKECMDGOALS)), $(filter-out $@,$(MAKECMDGOALS)), 100) | tr '\n' ' '`; \
+	echo "./$(NAME) $$args"; \
+	./$(NAME) $$args
+
+%:
+    @:
 
 clean:
 					rm -rf $(OBJ_DIR) $(ARCHIVES)
