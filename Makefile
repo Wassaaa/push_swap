@@ -69,7 +69,7 @@ tests: $(NAME)
 	@echo "Generating $(if $(filter-out $@,$(MAKECMDGOALS)), $(filter-out $@,$(MAKECMDGOALS)), 100) random numbers..."
 	@args=`shuf -i 1-1000 -n $(if $(filter-out $@,$(MAKECMDGOALS)), $(filter-out $@,$(MAKECMDGOALS)), 100) | tr '\n' ' '`; \
 	echo "./$(NAME) $$args"; \
-	./$(NAME) $$args
+	./$(NAME) $$args | wc -l
 
 %:
     @:
