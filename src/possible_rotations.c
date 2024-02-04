@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:00:57 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 16:29:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/04 22:32:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	both_down(t_stack *stack,int a_idx, int b_idx, t_rot *rot)
 	a_n = ft_lstsize(stack->a_top);
 	b_n = ft_lstsize(stack->b_top);
 	rot[1].rra = a_n - a_idx;
-	rot[1].rrb = a_n - b_idx;
+	rot[1].rrb = b_n - b_idx;
 	if (rot[1].rrb > rot[1].rra)
 		rot[1].rrr = rot[1].rra;
 	else
