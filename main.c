@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 21:05:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 01:45:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ int main(int argc, char **argv)
 	push_h_to_b(stack, &input, &p);
 	sort_three(stack, &input, &p);
 	push_b_to_a(stack, &input);
+	crash(SUCCESS);
 }
