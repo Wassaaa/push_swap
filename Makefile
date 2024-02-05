@@ -64,15 +64,28 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(NAME):
 					$(CC_FULL) $(M_MAIN) $(M_ARCHIVES) -o $(NAME)
-				
-tests: $(NAME)
-	@echo "Generating $(if $(filter-out $@,$(MAKECMDGOALS)), $(filter-out $@,$(MAKECMDGOALS)), 100) random numbers..."
-	@args=`shuf -i 1-1000 -n $(if $(filter-out $@,$(MAKECMDGOALS)), $(filter-out $@,$(MAKECMDGOALS)), 100) | tr '\n' ' '`; \
+
+tests2: $(NAME)
+	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+	@args=`awk -v n=$(filter-out $@,$(MAKECMDGOALS)) 'BEGIN{srand(); for(i=0; i<n; i++){ \
+		randnum = int(rand() * (2147483647 * 2 + 1)) - 2147483648; \
+		printf "%d ", randnum; \
+	}}'`; \
 	echo "./$(NAME) $$args"; \
 	./$(NAME) $$args | wc -l
 
-%:
-    @:
+
+tests: $(NAME)
+	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+	@args=`awk -v n=$(filter-out $@,$(MAKECMDGOALS)) 'BEGIN{srand(); while(length(seen) < n){ \
+		randnum = int(rand()*1000); \
+		if (!(randnum in seen)){ \
+			seen[randnum] = 1; \
+			printf "%d ", randnum; \
+		} \
+	}}'`; \
+	echo "./$(NAME) $$args"; \
+	./$(NAME) $$args | wc -l
 
 clean:
 					rm -rf $(OBJ_DIR) $(ARCHIVES)

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 01:07:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 19:51:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,31 @@ static t_list	*node_at_index(t_list *list, int a_index)
 	return (list);
 }
 
-static int	find_a_spot(t_stack *stack)
+static int	find_insert_spot(t_stack *stack, int b_index)
 {
-	int		a_top;
-	int		b_top;
-	int		a_bot;
+	t_list	*b_node;
+	t_list	*current_a;
+	t_list	*before;
 	int		a_index;
-	t_list	*current;
 
-	b_top = *(int *)stack->b_top->content;
-	a_bot = *(int *)ft_lstlast(stack->a_top)->content;
 	a_index = 0;
+	before = ft_lstlast(stack->a_top);
 	while (42)
 	{
-		current = node_at_index(stack->a_top, a_index);
-		a_top = *(int *)current->content;
-		if (a_top < b_top)
-			{
-				a_index++;
-				a_bot = a_top;
-				continue ;
-			}
-		if (a_top > b_top)
+		b_node = node_at_index(stack->b_top, b_index);
+		current_a = node_at_index(stack->a_top, a_index);
+		if (*(int *)current_a->content < *(int *)b_node->content)
 		{
-			if (a_bot > b_top)
-			{
-				a_index++;
-				a_bot = a_top;
-				continue ;
-			}
+			before = current_a;
+			a_index++;
 		}
-		return (a_index);
+		else if(*(int *)before->content > *(int *)b_node->content)
+		{
+			a_index++;
+			before = current_a;
+		}
+		else
+			return (a_index);
 	}
 }
 
@@ -88,16 +82,16 @@ t_rot	find_best_rotation(t_stack *stack)
 	int		b_size;
 
 	b_index = 0;
-	a_index = find_a_spot(stack);
+	a_index = find_insert_spot(stack, b_index);
 	get_rotations(stack, a_index, b_index, rot);
 	best = rot[0];
 	b_size = ft_lstsize(stack->b_top);
-	while (b_index < b_size)
+	while (++b_index < b_size)
 	{
 		best = best_rot(rot, best);
-		if (best.cost <= 1)
+		if (best.cost <= 4)
 			return (best);
-		b_index++;
+		a_index = find_insert_spot(stack, b_index);
 		get_rotations(stack, a_index, b_index, rot);
 	}
 	return (best);
