@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:19:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 21:15:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 22:53:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_min(t_list *list)
 	int	min;
 
 	min = INT_MAX;
-	while (list->next != NULL)
+	while (list != NULL)
 	{
 		if (*(int *)list->content < min)
 			min = *(int *)list->content;
@@ -54,9 +54,9 @@ void	handle_less(t_stack *stack, t_input *input, t_parts *p)
 		sort_three(stack, input, p);
 	else
 	{
-		ft_bzero(&rot, sizeof(rot));
 		while (ft_lstsize(stack->a_top) > 3)
 		{
+			ft_bzero(&rot, sizeof(rot));
 			a_n = ft_lstsize(stack->a_top);
 			index = get_index(find_min(stack->a_top), stack->a_top);
 			if (index > a_n - index)
@@ -67,8 +67,8 @@ void	handle_less(t_stack *stack, t_input *input, t_parts *p)
 			pb(stack, 1);
 		}
 		sort_three(stack, input, p);
-		pb(stack, 1);
-		pb(stack, 1);
+		pa(stack, 1);
+		pa(stack, 1);
 	}
 	crash(SUCCESS);
 }

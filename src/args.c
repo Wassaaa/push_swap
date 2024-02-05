@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 00:19:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 23:10:55 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	arg_per_nr(int argc, char **argv, t_input *input)
 	{
 		if (ft_strlen(argv[i + 1]) > 11)
 			crash(FAIL);
+		if (ft_strlen(argv[i + 1]) == 1 && *argv[i + 1] == '+')
+			crash(FAIL);
 		nb = ft_atol(argv[i + 1]);
 		if (nb > INT_MAX || nb < INT_MIN)
 			crash(FAIL);
@@ -55,11 +57,13 @@ static void	arg_per_nr(int argc, char **argv, t_input *input)
 void	validate_args(int argc, char **argv, t_input *input)
 {
 	if (argc < 2)
-		crash(FAIL);
+		crash(SUCCESS);
 	if (argc > 2)
 		arg_per_nr(argc, argv, input);
 	else
 	{
+		if (*argv[1] == '\0')
+			crash(FAIL);
 		input->args = argv[1];
 		one_arg(input);
 	}

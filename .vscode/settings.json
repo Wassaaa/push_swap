@@ -3,6 +3,8 @@
 		"stdio.h": "c",
 		"unistd.h": "c",
 		"limits.h": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"memory": "c",
+		"utility": "c"
 	}
 }

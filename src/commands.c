@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 00:10:54 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 20:38:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 22:42:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void	pb(t_stack *stack, int print)
 	t_list	*plucked;
 	t_list	*next;
 
+	if (stack == NULL || stack->a_top == NULL)
+		return ;
 	next = stack->a_top->next;
 	plucked = pluck_first(&stack->a_top);
 	stack->a_top = next;
@@ -131,6 +133,8 @@ void	pa(t_stack *stack, int print)
 	t_list	*plucked;
 	t_list	*next;
 
+	if (stack == NULL || stack->b_top == NULL)
+		return ;
 	next = stack->b_top->next;
 	plucked = pluck_first(&stack->b_top);
 	stack->b_top = next;

@@ -65,6 +65,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(NAME):
 					$(CC_FULL) $(M_MAIN) $(M_ARCHIVES) -o $(NAME)
 
+leaks: $(NAME)
+	@echo "Checking for leaks..."
+	@args=`python3 random_numbers.py 500`; \
+	./$(NAME) $$args | wc -l & leaks --atExit -- ./$(NAME)
+
+testruby: $(NAME)
+	exec bash
+	ARG=$(ruby -e "puts (0..500).to_a.shuffle.join(' ')"); ./push_swap $ARG | wc -l
+	exec zsh
+
 tests2: $(NAME)
 	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
 	@args=`python3 random_numbers.py $(filter-out $@,$(MAKECMDGOALS))`; \
@@ -83,6 +93,8 @@ tests: $(NAME)
 	}}'`; \
 	echo "./$(NAME) $$args"; \
 	./$(NAME) $$args | wc -l
+
+
 
 500:
 	@echo
