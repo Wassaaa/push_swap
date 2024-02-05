@@ -67,10 +67,7 @@ $(NAME):
 
 tests2: $(NAME)
 	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
-	@args=`awk -v n=$(filter-out $@,$(MAKECMDGOALS)) 'BEGIN{srand(); for(i=0; i<n; i++){ \
-		randnum = int(rand() * (2147483647 * 2 + 1)) - 2147483648; \
-		printf "%d ", randnum; \
-	}}'`; \
+	@args=`python3 random_numbers.py $(filter-out $@,$(MAKECMDGOALS))`; \
 	echo "./$(NAME) $$args"; \
 	./$(NAME) $$args | wc -l
 
@@ -87,6 +84,12 @@ tests: $(NAME)
 	echo "./$(NAME) $$args"; \
 	./$(NAME) $$args | wc -l
 
+500:
+	@echo
+
+100:
+	@echo
+
 clean:
 					rm -rf $(OBJ_DIR) $(ARCHIVES)
 					make clean -C $(LIBFT_DIR)
@@ -99,4 +102,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all re clean fclean 500 100

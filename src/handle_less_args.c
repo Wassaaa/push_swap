@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:19:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 20:44:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 21:15:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	find_min(t_list *list)
 {
 	int	min;
 
-	min = 2147483647;
+	min = INT_MAX;
 	while (list->next != NULL)
 	{
 		if (*(int *)list->content < min)

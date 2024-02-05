@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 00:16:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/05 21:30:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ size_t	count_digits(int n)
 	return (digits);
 }
 
+static int	minus_to_digit(char *str)
+{
+	if (*str == '-')
+	{
+		if (ft_isdigit(*(str + 1)))
+			return (1);
+		else
+			return (0);
+	}
+	return (0);
+}
+
 void	validate_format(char *str, t_input *input)
 {
 	int	number_length;
@@ -35,6 +47,8 @@ void	validate_format(char *str, t_input *input)
 	while (*str)
 	{
 		number_length = 0;
+		if (minus_to_digit(str))
+			str++;
 		if (!ft_isdigit(*str))
 			crash(FAIL);
 		while (ft_isdigit(*str))
