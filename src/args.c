@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:35:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	arg_per_nr(int argc, char **argv, t_input *input)
 	input->nr_count = argc - 1;
 	input->arr = ft_calloc(input->nr_count, sizeof(int));
 	input->control = ft_calloc(input->nr_count, sizeof(int));
+	if (!input->arr || !input->control)
+		crash(FAIL, NULL, input);
 	i = 0;
 	while (i < input->nr_count)
 	{
