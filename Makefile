@@ -82,6 +82,11 @@ tests: $(NAME)
 	echo "./$(NAME) $$args"; \
 	./push_swap $$args | wc -l
 
+checker: $(NAME)
+	@args=$$(ruby -e "require 'set'; nums = Set.new; while nums.size < $(filter-out $@,$(MAKECMDGOALS)) do nums.add(rand(-10000..10000)) end; puts nums.to_a.join(' ')"); \
+	echo "./$(NAME) $$args"; \
+	./push_swap $$args | ./checker_Mac $$args
+
 500:
 	@echo
 
@@ -91,11 +96,11 @@ tests: $(NAME)
 clean:
 					rm -rf $(OBJ_DIR) $(ARCHIVES)
 					make clean -C $(LIBFT_DIR)
+					rm -rf push_swap.dSYM/
 					@rm -f .bonus
 
 fclean: clean
 					rm -f $(NAME)
-					rm -rf push_swap.dSYM/
 					make -C libft fclean
 
 re: fclean all
