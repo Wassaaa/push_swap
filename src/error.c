@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 21:01:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 00:32:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	del(void *content)
 {
-	content = NULL;
+	if (content)
+		content = NULL;
 }
 
 void	crash(int err, t_stack *stack, t_input *input)

@@ -13,6 +13,7 @@ SRCS			=	args.c\
 					find_rotations.c\
 					ft_atol.c\
 					handle_less_args.c\
+					input_control.c\
 					is_sorted.c\
 					output.c\
 					parts.c\
@@ -20,6 +21,7 @@ SRCS			=	args.c\
 					push_to_a.c\
 					push_to_b.c\
 					quick_sort.c\
+					seperate_args.c\
 					single_string_args.c\
 					stack.c\
 
