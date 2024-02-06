@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 21:09:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	find_insert_spot(t_stack *stack, int b_index)
 			before = current_a;
 			a_index++;
 		}
-		else if(*(int *)before->content > *(int *)b_node->content)
+		else if (*(int *)before->content > *(int *)b_node->content)
 		{
 			a_index++;
 			before = current_a;
@@ -49,13 +49,11 @@ static int	find_insert_spot(t_stack *stack, int b_index)
 
 static void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 {
-
 	ft_bzero(rot, sizeof(*rot) * 4);
 	both_up(a_idx, b_idx, rot);
 	both_down(stack, a_idx, b_idx, rot);
 	up_down(stack, a_idx, b_idx, rot);
 	down_up(stack, a_idx, b_idx, rot);
-
 }
 
 static t_rot	best_rot(t_rot *rot, t_rot best)
@@ -68,7 +66,6 @@ static t_rot	best_rot(t_rot *rot, t_rot best)
 		if (rot[i].cost < best.cost)
 			best = rot[i];
 		i++;
-
 	}
 	return (best);
 }
@@ -96,4 +93,3 @@ t_rot	find_best_rotation(t_stack *stack)
 	}
 	return (best);
 }
-

@@ -6,16 +6,16 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:44:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 17:49:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:19:56 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-t_stack *construct_stack(t_input *input)
+t_stack	*construct_stack(t_input *input)
 {
 	t_stack *stack;
-	int		i;
+	int i;
 
 	i = -1;
 	stack = ft_calloc(1, sizeof(t_stack));

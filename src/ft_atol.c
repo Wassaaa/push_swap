@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:58:32 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 17:21:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static char	*ft_skip_whitespace(char *str)
 
 long	ft_atol(const char *str)
 {
-	long	number;
-	long	prev;
-	int		sign;
+	long number;
+	long prev;
+	int sign;
 
 	number = 0;
 	sign = 1;

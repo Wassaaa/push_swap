@@ -6,16 +6,16 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:30:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:30:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int partition(int *arr, int start, int end)
+static int	partition(int *arr, int start, int end)
 {
 	int	pivot;
 	int	i;
 	int	j;
-	int temp;
+	int	temp;
 
 	pivot = arr[end];
 	i = start - 1;
@@ -36,7 +36,7 @@ static int partition(int *arr, int start, int end)
 	arr[end] = temp;
 	return (i + 1);
 }
-void quick_sort(int *arr, int start, int end)
+void	quick_sort(int *arr, int start, int end)
 {
 	int	p;
 

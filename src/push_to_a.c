@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 20:39:03 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,3 @@ void	push_b_to_a(t_stack *stack, t_input *input)
 	}
 	finish_rotations(stack, input);
 }
-
-

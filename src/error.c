@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:08:54 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,16 @@ void	crash(int err, t_stack *stack, t_input *input)
 	{
 		free(stack);
 		stack = NULL;
-
 	}
 	if (input->arr != NULL)
 	{
 		free(input->arr);
 		input->arr = NULL;
-
 	}
 	if (input->control != NULL)
 	{
 		free(input->control);
 		input->control = NULL;
-
 	}
 	if (err == FAIL)
 		ft_putendl_fd("Error", 2);

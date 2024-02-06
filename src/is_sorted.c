@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:43:51 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/04 18:43:59 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:20:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_sorted(t_list *list, int min)
 {
-	int	current;
+	int current;
 
 	if (*(int *)list->content != min)
 		return (0);
