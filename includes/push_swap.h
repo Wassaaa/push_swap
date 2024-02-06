@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 22:53:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:42:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		is_unique(t_input *input, int nb, int index);
 
 void	validate_args(int argc, char **argv, t_input *input);
 long	ft_atol(const char *str);
-void	crash(int err);
+void	crash(int err, t_stack *stack, t_input *input);
 void	handle_less(t_stack *stack, t_input *input, t_parts *p);
 
 //to be changed

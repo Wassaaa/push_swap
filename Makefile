@@ -76,13 +76,6 @@ testruby: $(NAME)
 	echo "./$(NAME) $$args"; \
 	./push_swap $$args | wc -l
 
-tests2: $(NAME)
-	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
-	@args=`python3 random_numbers.py $(filter-out $@,$(MAKECMDGOALS))`; \
-	echo "./$(NAME) $$args"; \
-	./$(NAME) $$args | wc -l
-
-
 tests: $(NAME)
 	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
 	@args=`awk -v n=$(filter-out $@,$(MAKECMDGOALS)) 'BEGIN{srand(); while(length(seen) < n){ \

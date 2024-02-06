@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 21:30:27 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:54:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ void	validate_format(char *str, t_input *input)
 		if (minus_to_digit(str))
 			str++;
 		if (!ft_isdigit(*str))
-			crash(FAIL);
+			crash(FAIL, NULL, input);
 		while (ft_isdigit(*str))
 		{
 			number_length++;
 			if (number_length > 11)
-				crash(FAIL);
+				crash(FAIL, NULL, input);
 			str++;
 		}
 		if (*str != ' ' && *str != '\0')
-			crash(FAIL);
+			crash(FAIL, NULL, input);
 		if (*str != '\0')
 			str++;
 		nr_count++;
@@ -84,14 +84,14 @@ void	parse_numbers(t_input *input)
 	input->arr = ft_calloc(input->nr_count, sizeof(int));
 	input->control = ft_calloc(input->nr_count, sizeof(int));
 	if (!input->arr || !input->control)
-		crash(FAIL);
+		crash(FAIL, NULL, input);
 	while (input->nr_count > i)
 	{
 		nb = ft_atol(n_str);
 		if (nb > INT_MAX || nb < INT_MIN)
-			crash(FAIL);
+			crash(FAIL, NULL, input);
 		if (!is_unique(input, nb, i))
-			crash(FAIL);
+			crash(FAIL, NULL, input);
 		input->arr[i] = nb;
 		input->control[i] = nb;
 		n_str += count_digits(input->arr[i]) + 1;

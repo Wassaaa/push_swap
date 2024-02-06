@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:19:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/05 22:53:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:53:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	handle_less(t_stack *stack, t_input *input, t_parts *p)
 		pa(stack, 1);
 		pa(stack, 1);
 	}
-	crash(SUCCESS);
+	crash(SUCCESS, stack, input);
 }

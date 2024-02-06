@@ -5,6 +5,7 @@
 		"limits.h": "c",
 		"push_swap.h": "c",
 		"memory": "c",
-		"utility": "c"
+		"utility": "c",
+		"libft.h": "c"
 	}
 }
