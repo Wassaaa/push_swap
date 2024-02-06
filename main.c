@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 20:11:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 01:15:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack;
 	t_parts	p;
 
+	init_arrays(&input);
 	validate_args(argc, argv, &input);
 	stack = construct_stack(&input);
 	find_parts(&p, &input);

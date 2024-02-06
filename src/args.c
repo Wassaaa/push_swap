@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 00:31:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 01:35:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	init_arrays(t_input *input)
 		crash(FAIL, NULL, input);
 }
 
-void	add_to_arrays(t_input *input, int nb, int *index)
+void	add_to_arrays(t_input *input, long nb, int *index)
 {
 	if (nb > INT_MAX || nb < INT_MIN)
 		crash(FAIL, NULL, input);
 	if (!is_unique(input, nb, *index))
 		crash(FAIL, NULL, input);
-	input->arr[*index] = nb;
-	input->control[*index] = nb;
+	input->arr[*index] = (int)nb;
+	input->control[*index] = (int)nb;
 }

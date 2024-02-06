@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 00:15:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 01:33:59 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	count_args(t_input *input)
 {
+	char	*str;
+
+	str = input->args;
 	input->nr_count = 0;
-	while (*input->args)
+	while (*str)
 	{
-		while (ft_is_sign_or_digit(*input->args))
-			input->args++;
-		if (*input->args != ' ' && *input->args != '\0')
+		while (ft_is_sign_or_digit(*str))
+			str++;
+		if (*str != ' ' && *str != '\0')
 			crash(FAIL, NULL, input);
-		if (*input->args != '\0')
-			input->args++;
+		if (*str != '\0')
+			str++;
 		input->nr_count++;
 	}
 }
@@ -30,18 +33,18 @@ void	count_args(t_input *input)
 void	single_arg(t_input *input)
 {
 	char *str;
+	long nb;
 	int i;
-	int nb;
 
 	i = 0;
 	str = input->args;
-	init_arrays(input);
 	while (i < input->nr_count)
 	{
 		while (ft_is_sign_or_digit(*str))
 			str++;
 		if (!checks_before_atol(input->args, str - input->args))
 			crash(FAIL, NULL, input);
+		str++;
 		nb = ft_atol(input->args);
 		add_to_arrays(input, nb, &i);
 		input->args = str;

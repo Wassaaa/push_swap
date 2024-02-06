@@ -87,6 +87,7 @@ tests: $(NAME)
 			do nums.add(rand(-10000..10000)) \
 		end; \
 		puts nums.to_a.join(' ')"); \
+		echo ./push_swap $$args; \
 	./push_swap $$args | wc -l
 
 checker: $(NAME)

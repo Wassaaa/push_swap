@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 00:30:22 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 01:35:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ long		ft_atol(const char *str);
 
 void		init_arrays(t_input *input);
 void		validate_args(int argc, char **argv, t_input *input);
-void		add_to_arrays(t_input *input, int nb, int *index);
+void		add_to_arrays(t_input *input, long nb, int *index);
 
 /*START*/
 void		find_parts(t_parts *p, t_input *input);
