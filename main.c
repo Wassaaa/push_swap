@@ -6,12 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:12:59 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:31:02 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {

@@ -66,29 +66,21 @@ $(NAME):
 					$(CC_FULL) $(M_MAIN) $(M_ARCHIVES) -o $(NAME)
 
 leaks: $(NAME)
-	@echo "Checking for leaks..."
-	@args=`python3 random_numbers.py 500`; \
-	./$(NAME) $$args | wc -l & leaks --atExit -- ./$(NAME)
-
-testruby: $(NAME)
-	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
-	@args=$$(ruby -e "require 'set'; nums = Set.new; while nums.size < $(filter-out $@,$(MAKECMDGOALS)) do nums.add(rand(-2147483648..2147483647)) end; puts nums.to_a.join(' ')"); \
-	echo "./$(NAME) $$args"; \
-	./push_swap $$args | wc -l
+	@echo "Checking for leaks (100 random numbers)..."
+	@args=$$(ruby -e "\
+		require 'set'; \
+		nums = Set.new; \
+		while nums.size < 500 \
+			do nums.add(rand(-10000..10000)) \
+		end; \
+		puts nums.to_a.join(' ')"); \
+	leaks --atExit -- ./$(NAME) $$args
 
 tests: $(NAME)
 	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
-	@args=`awk -v n=$(filter-out $@,$(MAKECMDGOALS)) 'BEGIN{srand(); while(length(seen) < n){ \
-		randnum = int(rand()*1000); \
-		if (!(randnum in seen)){ \
-			seen[randnum] = 1; \
-			printf "%d ", randnum; \
-		} \
-	}}'`; \
+	@args=$$(ruby -e "require 'set'; nums = Set.new; while nums.size < $(filter-out $@,$(MAKECMDGOALS)) do nums.add(rand(-10000..10000)) end; puts nums.to_a.join(' ')"); \
 	echo "./$(NAME) $$args"; \
-	./$(NAME) $$args | wc -l
-
-
+	./push_swap $$args | wc -l
 
 500:
 	@echo
