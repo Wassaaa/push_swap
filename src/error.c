@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:46:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 21:01:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	del(void *content)
 
 void	crash(int err, t_stack *stack, t_input *input)
 {
-	ft_lstclear(&stack->a_top, del);
-	ft_lstclear(&stack->b_top, del);
+	if (stack && stack->a_top)
+		ft_lstclear(&stack->a_top, del);
+	if (stack && stack->b_top)
+		ft_lstclear(&stack->b_top, del);
 	if (stack != NULL)
 	{
 		free(stack);

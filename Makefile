@@ -70,7 +70,7 @@ leaks: $(NAME)
 	@args=$$(ruby -e "\
 		require 'set'; \
 		nums = Set.new; \
-		while nums.size < 500 \
+		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
 			do nums.add(rand(-10000..10000)) \
 		end; \
 		puts nums.to_a.join(' ')"); \
@@ -78,14 +78,34 @@ leaks: $(NAME)
 
 tests: $(NAME)
 	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
-	@args=$$(ruby -e "require 'set'; nums = Set.new; while nums.size < $(filter-out $@,$(MAKECMDGOALS)) do nums.add(rand(-10000..10000)) end; puts nums.to_a.join(' ')"); \
-	echo "./$(NAME) $$args"; \
+	@args=$$(ruby -e "\
+		require 'set'; \
+		nums = Set.new; \
+		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
+			do nums.add(rand(-10000..10000)) \
+		end; \
+		puts nums.to_a.join(' ')"); \
 	./push_swap $$args | wc -l
 
 checker: $(NAME)
-	@args=$$(ruby -e "require 'set'; nums = Set.new; while nums.size < $(filter-out $@,$(MAKECMDGOALS)) do nums.add(rand(-10000..10000)) end; puts nums.to_a.join(' ')"); \
-	echo "./$(NAME) $$args"; \
+	@args=$$(ruby -e "\
+		require 'set'; \
+		nums = Set.new; \
+		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
+			do nums.add(rand(-10000..10000)) \
+		end; \
+		puts nums.to_a.join(' ')"); \
 	./push_swap $$args | ./checker_Mac $$args
+
+visual: $(NAME)
+	@args=$$(ruby -e "\
+		require 'set'; \
+		nums = Set.new; \
+		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
+			do nums.add(rand(-10000..10000)) \
+		end; \
+		puts nums.to_a.join(' ')"); \
+	./push_swap $$args | ./pro_checker $$args
 
 500:
 	@echo

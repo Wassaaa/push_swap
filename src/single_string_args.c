@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 21:10:59 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ size_t	count_digits(int n)
 	return (digits);
 }
 
-static int	minus_to_digit(char *str)
+int	minus_to_digit(char *str)
 {
 	if (*str == '-')
 	{
-		if (ft_isdigit(*(str + 1)))
+		if (ft_isdigit(*(str + 1)) && *(str + 1) != '0')
 			return (1);
 		else
 			return (0);

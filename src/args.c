@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:35:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 21:19:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ int	is_unique(t_input *input, int nb, int index)
 	return (1);
 }
 
+static int	checks_before_atol(char *arg)
+{
+	int	len;
+
+	len = ft_strlen(arg);
+	if (len > 11)
+		return (0);
+	if (len == 1 && (*arg == '+' || *arg == '-'))
+		return (0);
+	if (*arg == '-' && *(arg + 1) == '0')
+		return (0);
+	return (1);
+}
+
 static void	arg_per_nr(int argc, char **argv, t_input *input)
 {
 	int		i;
@@ -40,9 +54,7 @@ static void	arg_per_nr(int argc, char **argv, t_input *input)
 	i = 0;
 	while (i < input->nr_count)
 	{
-		if (ft_strlen(argv[i + 1]) > 11)
-			crash(FAIL, NULL, input);
-		if (ft_strlen(argv[i + 1]) == 1 && *argv[i + 1] == '+')
+		if (!checks_before_atol(argv[i + 1]))
 			crash(FAIL, NULL, input);
 		nb = ft_atol(argv[i + 1]);
 		if (nb > INT_MAX || nb < INT_MIN)

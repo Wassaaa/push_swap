@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:59:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/06 21:10:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_rot
 
 void		one_arg(t_input *input);
 void		validate_format(char *str, t_input *input);
+int			minus_to_digit(char *str);
 size_t		count_digits(int n);
 int			is_unique(t_input *input, int nb, int index);
 
