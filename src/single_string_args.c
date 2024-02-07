@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 02:59:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:27:35 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	count_args(t_input *input)
 			str++;
 		input->nr_count++;
 	}
+	if (input->nr_count == 0)
+		crash(FAIL, NULL, input);
 }
 
 void	single_arg(t_input *input)
