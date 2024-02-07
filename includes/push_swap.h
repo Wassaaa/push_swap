@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:34:09 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 01:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,17 @@ void		push_h_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_b_to_a(t_stack *stack, t_input *input);
 
 /*ROTATIONS*/
-t_rot		find_best_rotation(t_stack *stack);
+t_rot		find_best_rotation(t_stack *stack, int b_index);
+int			find_insert_spot(t_stack *stack, int b_index);
+t_rot		best_rot(t_rot *rot, t_rot best);
+void		get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void		both_up(int a_idx, int b_idx, t_rot *rot);
 void		both_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void		up_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void		down_up(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void		set_cost(t_rot *rot);
-void		execute_best(t_rot best, t_stack *stack);
+t_rot		final_rot(t_stack *stack, t_input *input);
+void		exec(t_rot best, t_stack *stack, int print);
 
 /*OUTPUT*/
 void		print_current_stacks(t_stack *stack);

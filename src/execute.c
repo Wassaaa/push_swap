@@ -6,24 +6,24 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:43:01 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 01:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	execute_best(t_rot best, t_stack *stack)
+void	exec(t_rot best, t_stack *stack, int print)
 {
 	while (best.ra--)
-		ra(stack, 1);
+		ra(stack, print);
 	while (best.rb--)
-		rb(stack, 1);
+		rb(stack, print);
 	while (best.rr--)
-		rr(stack, 1);
+		rr(stack, print);
 	while (best.rra--)
-		rra(stack, 1);
+		rra(stack, print);
 	while (best.rrb--)
-		rrb(stack, 1);
+		rrb(stack, print);
 	while (best.rrr--)
-		rrr(stack, 1);
+		rrr(stack, print);
 }

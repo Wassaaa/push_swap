@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:48:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 00:43:47 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_list	*node_at_index(t_list *list, int a_index)
 	return (list);
 }
 
-static int	find_insert_spot(t_stack *stack, int b_index)
+int	find_insert_spot(t_stack *stack, int b_index)
 {
 	t_list	*b_node;
 	t_list	*current_a;
@@ -47,7 +47,7 @@ static int	find_insert_spot(t_stack *stack, int b_index)
 	}
 }
 
-static void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
+void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 {
 	ft_bzero(rot, sizeof(*rot) * 4);
 	both_up(a_idx, b_idx, rot);
@@ -56,7 +56,7 @@ static void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 	down_up(stack, a_idx, b_idx, rot);
 }
 
-static t_rot	best_rot(t_rot *rot, t_rot best)
+t_rot	best_rot(t_rot *rot, t_rot best)
 {
 	int	i;
 
@@ -70,26 +70,37 @@ static t_rot	best_rot(t_rot *rot, t_rot best)
 	return (best);
 }
 
-t_rot	find_best_rotation(t_stack *stack)
+// t_rot	find_best_rotation(t_stack *stack, int b_index)
+// {
+// 	int		a_index;
+// 	t_rot	rot[4];
+// 	t_rot	best;
+// 	int		b_size;
+
+// 	a_index = find_insert_spot(stack, b_index);
+// 	get_rotations(stack, a_index, b_index, rot);
+// 	best = rot[0];
+// 	b_size = ft_lstsize(stack->b_top);
+// 	while (++b_index < b_size)
+// 	{
+// 		best = best_rot(rot, best);
+// 		if (best.cost <= 3)
+// 			return (best);
+// 		a_index = find_insert_spot(stack, b_index);
+// 		get_rotations(stack, a_index, b_index, rot);
+// 	}
+// 	return (best);
+// }
+
+t_rot	find_best_rotation(t_stack *stack, int b_index)
 {
 	int		a_index;
-	int		b_index;
 	t_rot	rot[4];
 	t_rot	best;
-	int		b_size;
 
-	b_index = 0;
 	a_index = find_insert_spot(stack, b_index);
 	get_rotations(stack, a_index, b_index, rot);
 	best = rot[0];
-	b_size = ft_lstsize(stack->b_top);
-	while (++b_index < b_size)
-	{
-		best = best_rot(rot, best);
-		if (best.cost <= 3)
-			return (best);
-		a_index = find_insert_spot(stack, b_index);
-		get_rotations(stack, a_index, b_index, rot);
-	}
+	best = best_rot(rot, best);
 	return (best);
 }

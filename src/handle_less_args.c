@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:19:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:22 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 01:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_less(t_stack *stack, t_input *input, t_parts *p)
 				rot.rra = a_n - index;
 			else
 				rot.ra = index;
-			execute_best(rot, stack);
+			exec(rot, stack, 1);
 			pb(stack, 1);
 		}
 		sort_three(stack, input, p);
