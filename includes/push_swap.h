@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:10:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:34:09 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		add_to_arrays(t_input *input, long nb, int *index);
 /*START*/
 void		find_parts(t_parts *p, t_input *input);
 void		quick_sort(int *arr, int start, int end);
-t_stack		*construct_stack(t_input *input);
+void		construct_stack(t_input *input, t_stack *stack);
 void		handle_less(t_stack *stack, t_input *input, t_parts *p);
 
 /*PUSH TO B*/

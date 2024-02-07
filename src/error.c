@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 00:32:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:32:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ void	crash(int err, t_stack *stack, t_input *input)
 		ft_lstclear(&stack->a_top, del);
 	if (stack && stack->b_top)
 		ft_lstclear(&stack->b_top, del);
-	if (stack != NULL)
-	{
-		free(stack);
-		stack = NULL;
-	}
 	if (input->arr != NULL)
 	{
 		free(input->arr);
