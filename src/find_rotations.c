@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 02:33:04 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_rot	find_best_rotation(t_stack *stack)
 	while (++b_index < b_size)
 	{
 		best = best_rot(rot, best);
-		if (best.cost <= 0)
+		if (best.cost <= 3)
 			return (best);
 		a_index = find_insert_spot(stack, b_index);
 		get_rotations(stack, a_index, b_index, rot);

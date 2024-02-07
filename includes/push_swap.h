@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 01:35:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 03:00:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <libft.h>
 # include <limits.h>
 
-# define SHOW_STACKS 0
+# define SHOW_STACKS 1
 
 # define SUCCESS 0
 # define FAIL 1

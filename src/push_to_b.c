@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:39:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/07 02:11:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	push_l_to_b(t_stack *stack, t_input *input, t_parts *p)
 		pb(stack, 1);
 		if (a_top_int < input->control[p->low_mid])
 		{
-			sb(stack, 1);
+			rb(stack, 1);
 		}
 	}
 }
 
 void	push_h_to_b(t_stack *stack, t_input *input, t_parts *p)
 {
-		int a_int_top;
+	int	a_int_top;
 
 	while (ft_lstsize(stack->a_top) > 3)
 	{
@@ -62,8 +62,8 @@ void	push_h_to_b(t_stack *stack, t_input *input, t_parts *p)
 
 void	sort_three(t_stack *stack, t_input *input, t_parts *p)
 {
-	int first;
-	int second;
+	int	first;
+	int	second;
 
 	if (is_sorted(stack->a_top, input->control[p->min]))
 		return ;
