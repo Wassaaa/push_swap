@@ -5,3 +5,6 @@ push_swap.dSYM/
 push_swap
 libft/libft.a
 0
+control_tests.sh
+push_swap_test.sh
+push_swap_test_linux.sh
