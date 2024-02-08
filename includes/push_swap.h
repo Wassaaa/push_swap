@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/08 01:06:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 00:31:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <limits.h>
 
 # define SHOW_STACKS 0
+# define SIM_LEN 120
+# define GOOD_ENOUGH 3
+# define MAX_CRAZY_MODE 120
 
 # define SUCCESS 0
 # define FAIL 1
@@ -56,6 +59,9 @@ typedef struct s_input
 	char	*args;
 	int		*control;
 	int		nr_count;
+	int		current_cost;
+	int		best_cost;
+	int		b_n;
 }			t_input;
 
 typedef struct s_rot
@@ -68,6 +74,12 @@ typedef struct s_rot
 	int		rrr;
 	int		cost;
 }			t_rot;
+
+typedef struct s_rot_list
+{
+	t_rot	*best;
+	t_rot	*new;
+}			t_rot_list;
 
 /*INPUT CONTROL*/
 void		seperate_args(t_input *input, char **argv);
@@ -105,6 +117,7 @@ t_list		*pluck_first(t_list **lst);
 void		push_l_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_h_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_b_to_a(t_stack *stack, t_input *input);
+void		b_to_a_high(t_stack *stack, t_input *input);
 
 /*ROTATIONS*/
 t_rot		find_best_rotation(t_stack *stack, int b_index);

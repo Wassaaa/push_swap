@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/08 01:07:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 00:23:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,70 +82,111 @@ t_stack	*copy_stack(const t_stack *stack)
 	return (new_stack);
 }
 
-int	ten_moves_ahead(t_stack *stack, int b_index, t_input *input)
+int	add_to_rot(t_rot *r, t_rot best, int *i)
+{
+	r[*i] = best;
+	*i = *i + 1;
+	return (best.cost);
+}
+
+void	ten_moves_ahead(t_stack *stack, int b_index, t_input *input, t_rot *r)
 {
 	t_stack	*current;
-	int		ten_cost;
 	t_rot	best;
+	int		i;
 
-	ten_cost = 0;
+	i = 0;
+	input->current_cost = 0;
 	current = copy_stack(stack);
 	if (!current)
 		crash(FAIL, stack, input);
 	best = find_best_rotation(current, b_index);
 	exec(best, current, 0);
-	ten_cost += best.cost;
-	while (current->b_top != NULL)
+	pa(current, 0);
+	input->current_cost += add_to_rot(r, best, &i);
+	while (current->b_top != NULL && i < input->b_n)
 	{
 		best = find_best_rotation(current, 0);
-		ten_cost += best.cost + 1;
+		input->current_cost += add_to_rot(r, best, &i);
 		exec(best, current, 0);
 		pa(current, 0);
 	}
 	if (current->b_top == NULL)
-		ten_cost += final_rot(current, input).cost;
+		input->current_cost += add_to_rot(r, final_rot(current, input), &i);
 	free_stack(current);
-	return (ten_cost);
 }
 
-int	evaluate_moves(t_stack *stack, t_input *input)
+void	update_best(t_rot_list *rots, t_input *input)
 {
-	int		lowest_cost;
-	int		best_move_index;
-	int		temp_cost;
-	t_list	*current_b;
-	int		index;
+	if (input->current_cost < input->best_cost)
+	{
+		free(rots->best);
+		rots->best = rots->new;
+		input->best_cost = input->current_cost;
+		rots->new = NULL;
+	}
+	free(rots->new);
+	rots->new = NULL;
+}
 
-	lowest_cost = INT_MAX;
-	best_move_index = -1;
+t_rot	*evaluate_moves(t_stack *stack, t_input *input)
+{
+	t_list		*current_b;
+	int			index;
+	t_rot_list	rots;
+
 	current_b = stack->b_top;
 	index = 0;
+	rots.best = ft_calloc(input->b_n, sizeof(t_rot));
+	if (!rots.new)
+		crash(FAIL, stack, input);
 	while (current_b != NULL)
 	{
-		temp_cost = ten_moves_ahead(stack, index, input);
-		if (temp_cost < lowest_cost)
-		{
-			lowest_cost = temp_cost;
-			best_move_index = index;
-		}
+		rots.new = ft_calloc(input->b_n, sizeof(t_rot));
+		if (!rots.new)
+			crash(FAIL, stack, input);
+		ten_moves_ahead(stack, index, input, rots.new);
+		update_best(&rots, input);
 		current_b = current_b->next;
 		index++;
 	}
-	return (best_move_index);
+	return (rots.best);
 }
 
 void	push_b_to_a(t_stack *stack, t_input *input)
 {
-	t_rot	rot;
-	int		best_index;
+	t_rot	*my_moves;
+	int		i;
 
 	while (stack->b_top != NULL)
 	{
-		best_index = evaluate_moves(stack, input);
-		rot = find_best_rotation(stack, best_index);
-		exec(rot, stack, 1);
+		input->best_cost = INT_MAX;
+		input->b_n = ft_lstsize(stack->b_top);
+		if (input->b_n > SIM_LEN)
+			input->b_n = SIM_LEN;
+		else
+			input->b_n++;
+		my_moves = evaluate_moves(stack, input);
+		i = 0;
+		while (i < input->b_n)
+		{
+			exec(my_moves[i], stack, 1);
+			pa(stack, 1);
+			i++;
+		}
+		free(my_moves);
+	}
+}
+
+void	b_to_a_high(t_stack *stack, t_input *input)
+{
+	t_rot	best;
+
+	while (stack->b_top != NULL)
+	{
+		best = find_best_rotation(stack, 0);
+		exec(best, stack, 1);
 		pa(stack, 1);
 	}
-	rot = final_rot(stack, input);
-	exec(rot, stack, 1);
+	exec(final_rot(stack, input), stack, 1);
 }

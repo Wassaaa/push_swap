@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:32:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 00:30:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	main(int argc, char **argv)
 	push_l_to_b(&stack, &input, &p);
 	push_h_to_b(&stack, &input, &p);
 	sort_three(&stack, &input, &p);
-	push_b_to_a(&stack, &input);
+	if (input.nr_count <= MAX_CRAZY_MODE)
+		push_b_to_a(&stack, &input);
+	else
+		b_to_a_high(&stack, &input);
 	crash(SUCCESS, &stack, &input);
 	return (0);
 }
