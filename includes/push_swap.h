@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:34:09 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 19:43:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void		sb(t_stack *stack, int print);
 int			is_sorted(t_list *list, int min);
 void		sort_three(t_stack *stack, t_input *input, t_parts *p);
 t_list		*pluck_first(t_list **lst);
+t_list		*pluck_last(t_list **lst);
 void		push_l_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_h_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_b_to_a(t_stack *stack, t_input *input);

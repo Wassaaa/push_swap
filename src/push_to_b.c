@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:39:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 02:11:21 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 19:59:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ static int	is_breakpoint(int content, t_parts *p, t_input *input)
 void	push_l_to_b(t_stack *stack, t_input *input, t_parts *p)
 {
 	int	a_top_int;
+	int	stop_target;
 
-	while (ft_lstsize(stack->a_top) > p->max - p->high_mid + 2)
+	stop_target = p->max - p->high_mid + 2;
+	while (ft_lstsize(stack->a_top) > stop_target)
 	{
 		a_top_int = *(int *)stack->a_top->content;
 		if (is_breakpoint(a_top_int, p, input)
@@ -46,12 +48,12 @@ void	push_l_to_b(t_stack *stack, t_input *input, t_parts *p)
 
 void	push_h_to_b(t_stack *stack, t_input *input, t_parts *p)
 {
-	int	a_int_top;
+	int	a_top_int;
 
 	while (ft_lstsize(stack->a_top) > 3)
 	{
-		a_int_top = *(int *)stack->a_top->content;
-		if (is_breakpoint(a_int_top, p, input))
+		a_top_int = *(int *)stack->a_top->content;
+		if (is_breakpoint(a_top_int, p, input))
 		{
 			ra(stack, 1);
 			continue ;
