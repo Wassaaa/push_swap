@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:00:57 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:14 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/08 18:29:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	up_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 
 void	down_up(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 {
-	int a_n;
+	int	a_n;
 
 	a_n = ft_lstsize(stack->a_top);
 	rot[3].rra = a_n - a_idx;

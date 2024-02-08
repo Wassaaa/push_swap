@@ -5,8 +5,13 @@ INCLUDES		=	./includes
 
 M_MAIN			=	./main.c
 
+b_MAIN			=	./main_bonus.c
+
 SRCS			=	args.c\
 					commands.c\
+					commands_rotate.c\
+					commands_reverse.c\
+					commands_push_swap.c\
 					debug_prints.c\
 					error.c\
 					execute.c\
