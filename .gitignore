@@ -1,0 +1,6 @@
+obj/
+archives/
+traces.txt
+push_swap.dSYM/
+push_swap
+libft/libft.a
