@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:39:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 01:46:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 17:19:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,20 @@ static int	is_breakpoint(int content, t_parts *p, t_input *input)
 	return (0);
 }
 
-void	push_l_to_b(t_stack *stack, t_input *input, t_parts *p)
+void	push_l_to_b(t_stack *stack, t_input *inp, t_parts *p)
 {
-	int	a_top_int;
+	int	a_top;
 
 	while (ft_lstsize(stack->a_top) > p->max - p->high_mid + 2)
 	{
-		a_top_int = *(int *)stack->a_top->content;
-		if (is_breakpoint(a_top_int, p, input)
-			|| a_top_int > input->control[p->high_mid])
+		a_top = *(int *)stack->a_top->content;
+		if (is_breakpoint(a_top, p, inp) || a_top > inp->control[p->high_mid])
 		{
 			ra(stack, 1);
 			continue ;
 		}
 		pb(stack, 1);
-		if (a_top_int < input->control[p->low_mid])
+		if (a_top > inp->control[p->low_mid])
 		{
 			rb(stack, 1);
 		}
