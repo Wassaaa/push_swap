@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 22:40:52 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 22:46:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	validate_args(int argc, char **argv, t_input *input)
 		single_arg(input);
 	}
 }
-
 
 void	add_to_arrays(t_input *input, long nb, int *index)
 {

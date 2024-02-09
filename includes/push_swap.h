@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 22:06:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 22:54:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <limits.h>
 
 # define SHOW_STACKS 0
-# define SIM_LEN 20
+# define SIM_LEN 120
 # define GOOD_ENOUGH 3
 # define MAX_CRAZY_MODE 120
 
