@@ -6,26 +6,21 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:43:51 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 01:46:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:37:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	is_sorted(t_list *list, int min)
+int	is_sorted(t_list *stack)
 {
-	int	current;
-
-	if (*(int *)list->content != min)
-		return (0);
-	current = min;
-	while (list && list->next != NULL)
+	if (stack == NULL)
+		return (1);
+	while (stack->next)
 	{
-		if (*(int *)list->next->content > current)
-			current = *(int *)list->next->content;
-		else
+		if (*(int *)stack->content > *(int *)stack->next->content)
 			return (0);
-		list = list->next;
+		stack = stack->next;
 	}
 	return (1);
 }

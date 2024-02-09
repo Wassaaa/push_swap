@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 01:45:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 22:44:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	push_b_to_a(t_stack *stack, t_input *input)
 	t_rot	*my_moves;
 	int		i;
 
+	input->b_n = ft_lstsize(stack->b_top);
 	while (stack->b_top != NULL)
 	{
 		input->best_cost = INT_MAX;
-		input->b_n = ft_lstsize(stack->b_top);
 		if (input->b_n > SIM_LEN)
 			input->b_n = SIM_LEN;
 		else

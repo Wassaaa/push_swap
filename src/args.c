@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 16:33:51 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 22:40:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static void	init_arrays(t_input *input)
 {
 	input->arr = ft_calloc(input->nr_count, sizeof(int));
+	if (!input->arr)
+		crash(FAIL, NULL, input);
 	input->control = ft_calloc(input->nr_count, sizeof(int));
-	if (!input->arr || !input->control)
+	if (!input->control)
 		crash(FAIL, NULL, input);
 }
 

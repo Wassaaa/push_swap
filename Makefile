@@ -14,12 +14,12 @@ SRCS			=	args.c\
 					error.c\
 					execute.c\
 					find_rotations.c\
+					find_stuff.c\
 					ft_atol.c\
 					handle_less_args.c\
 					input_control.c\
 					is_sorted.c\
 					output.c\
-					parts.c\
 					possible_rotations.c\
 					push_to_a.c\
 					push_to_b.c\

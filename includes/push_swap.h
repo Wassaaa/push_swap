@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 16:45:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 22:06:35 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <limits.h>
 
 # define SHOW_STACKS 0
-# define SIM_LEN 120
+# define SIM_LEN 20
 # define GOOD_ENOUGH 3
 # define MAX_CRAZY_MODE 120
 
@@ -47,6 +47,8 @@ typedef struct s_stack
 typedef struct s_parts
 {
 	int		min;
+	int		second;
+	int		third;
 	int		low_mid;
 	int		mid;
 	int		high_mid;
@@ -96,7 +98,9 @@ void		add_to_arrays(t_input *input, long nb, int *index);
 void		find_parts(t_parts *p, t_input *input);
 void		quick_sort(int *arr, int start, int end);
 void		construct_stack(t_input *input, t_stack *stack);
-void		handle_less(t_stack *stack, t_input *input, t_parts *p);
+void		handle_less(t_stack *stack, t_input *input);
+t_list		*find_max(t_list *a);
+int			find_min(t_list *list);
 
 /*PUSH TO B TO A*/
 void		pa(t_stack *stack, int print);
@@ -108,8 +112,8 @@ void		rra(t_stack *stack, int print);
 void		rrb(t_stack *stack, int print);
 void		rrr(t_stack *stack, int print);
 void		sa(t_stack *stack, int print);
-int			is_sorted(t_list *list, int min);
-void		sort_three(t_stack *stack, t_input *input, t_parts *p);
+int			is_sorted(t_list *stack);
+void		sort_three(t_stack *stack);
 t_list		*pluck_first(t_list **lst);
 t_list		*pluck_last(t_list **lst);
 void		push_l_to_b(t_stack *stack, t_input *input, t_parts *p);

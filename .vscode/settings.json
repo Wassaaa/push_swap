@@ -8,6 +8,9 @@
 		"utility": "c",
 		"libft.h": "c",
 		"__config": "c",
-		"regex": "c"
+		"regex": "c",
+		"chrono": "c",
+		"variant": "c",
+		"__locale": "c"
 	}
 }

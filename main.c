@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 00:30:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 20:45:56 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ int	main(int argc, char **argv)
 	construct_stack(&input, &stack);
 	find_parts(&p, &input);
 	quick_sort(input.control, 0, input.nr_count - 1);
-	if (is_sorted(stack.a_top, input.control[p.min]))
+	if (is_sorted(stack.a_top))
 		crash(SUCCESS, &stack, &input);
 	if (input.nr_count <= 5)
-		handle_less(&stack, &input, &p);
+	{
+		handle_less(&stack, &input);
+		crash(SUCCESS, &stack, &input);
+	}
 	push_l_to_b(&stack, &input, &p);
 	push_h_to_b(&stack, &input, &p);
-	sort_three(&stack, &input, &p);
+	handle_less(&stack, &input);
 	if (input.nr_count <= MAX_CRAZY_MODE)
 		push_b_to_a(&stack, &input);
 	else
