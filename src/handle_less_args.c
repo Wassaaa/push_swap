@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 20:19:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:22 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 19:14:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,38 @@ int	get_index(int nb, t_list *list)
 	return (index);
 }
 
-void	handle_less(t_stack *stack, t_input *input, t_parts *p)
+void	sort_five(t_stack *stack)
 {
 	int		index;
+	int		start_len;
 	int		a_n;
 	t_rot	rot;
 
-	if (input->nr_count <= 3)
-		sort_three(stack, input, p);
-	else
+	start_len = ft_lstsize(stack->a_top);
+	while (ft_lstsize(stack->a_top) > 3)
 	{
-		while (ft_lstsize(stack->a_top) > 3)
-		{
-			ft_bzero(&rot, sizeof(rot));
-			a_n = ft_lstsize(stack->a_top);
-			index = get_index(find_min(stack->a_top), stack->a_top);
-			if (index > a_n - index)
-				rot.rra = a_n - index;
-			else
-				rot.ra = index;
-			execute_best(rot, stack);
-			pb(stack, 1);
-		}
-		sort_three(stack, input, p);
-		pa(stack, 1);
-		pa(stack, 1);
+		ft_bzero(&rot, sizeof(rot));
+		a_n = ft_lstsize(stack->a_top);
+		index = get_index(find_min(stack->a_top), stack->a_top);
+		if (index > a_n - index)
+			rot.rra = a_n - index;
+		else
+			rot.ra = index;
+		execute_best(rot, stack);
+		pb(stack, 1);
 	}
-	crash(SUCCESS, stack, input);
+	sort_three(stack);
+	pa(stack, 1);
+	if (start_len == 5)
+		pa(stack, 1);
+}
+
+void	handle_less(t_stack *stack, t_input *input)
+{
+	if (is_sorted(stack->a_top))
+		return ;
+	if (input->nr_count <= 3)
+		sort_three(stack);
+	else
+		sort_five(stack);
 }

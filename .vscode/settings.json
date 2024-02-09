@@ -8,6 +8,22 @@
 		"memory": "c",
 		"utility": "c",
 		"libft.h": "c",
-		"__config": "c"
+		"__config": "c",
+		"optional": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"array": "c",
+		"functional": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"variant": "c",
+		"__bit_reference": "c",
+		"__node_handle": "c",
+		"bitset": "c",
+		"deque": "c",
+		"__memory": "c",
+		"limits": "c",
+		"regex": "c",
+		"vector": "c"
 	}
 }
