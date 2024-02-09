@@ -1,9 +1,11 @@
 NAME			=	push_swap
+bonus			= 	checker
 OBJ_DIR			=	./obj
 SRC_DIR			=	./src
 INCLUDES		=	./includes
 
 M_MAIN			=	./main.c
+B_MAIN			=	./main_bonus.c
 
 SRCS			=	args.c\
 					commands.c\
