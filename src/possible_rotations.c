@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:00:57 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 01:46:33 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:45:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	set_cost(t_rot *rot)
+static void	set_cost(t_rot *rot)
 {
 	rot->cost = rot->ra + rot->rb + rot->rr + rot->rra + rot->rrb + rot->rrr;
 }

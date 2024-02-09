@@ -6,11 +6,19 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 16:59:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 02:58:21 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:33:51 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+
+static void	init_arrays(t_input *input)
+{
+	input->arr = ft_calloc(input->nr_count, sizeof(int));
+	input->control = ft_calloc(input->nr_count, sizeof(int));
+	if (!input->arr || !input->control)
+		crash(FAIL, NULL, input);
+}
 
 static void	init_input(t_input *input)
 {
@@ -38,13 +46,6 @@ void	validate_args(int argc, char **argv, t_input *input)
 	}
 }
 
-void	init_arrays(t_input *input)
-{
-	input->arr = ft_calloc(input->nr_count, sizeof(int));
-	input->control = ft_calloc(input->nr_count, sizeof(int));
-	if (!input->arr || !input->control)
-		crash(FAIL, NULL, input);
-}
 
 void	add_to_arrays(t_input *input, long nb, int *index)
 {

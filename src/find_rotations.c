@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 01:46:00 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:44:35 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_list	*node_at_index(t_list *list, int a_index)
 	return (list);
 }
 
-int	find_insert_spot(t_stack *stack, int b_index)
+static int	find_insert_spot(t_stack *stack, int b_index)
 {
 	t_list	*b_node;
 	t_list	*current_a;
@@ -47,7 +47,7 @@ int	find_insert_spot(t_stack *stack, int b_index)
 	}
 }
 
-void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
+static void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 {
 	ft_bzero(rot, sizeof(*rot) * 4);
 	both_up(a_idx, b_idx, rot);
@@ -56,7 +56,7 @@ void	get_rotations(t_stack *stack, int a_idx, int b_idx, t_rot *rot)
 	down_up(stack, a_idx, b_idx, rot);
 }
 
-t_rot	best_rot(t_rot *rot, t_rot best)
+static t_rot	best_rot(t_rot *rot, t_rot best)
 {
 	int	i;
 
