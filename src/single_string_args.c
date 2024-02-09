@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:32:34 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:27:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 02:07:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	count_args(t_input *input)
 
 void	single_arg(t_input *input)
 {
-	char *str;
-	long nb;
-	int i;
+	int		i;
+	long	nb;
+	char	*str;
 
 	i = 0;
 	str = input->args;

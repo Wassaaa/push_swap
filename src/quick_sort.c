@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:30:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/06 18:20:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 02:08:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	partition(int *arr, int start, int end)
 	arr[end] = temp;
 	return (i + 1);
 }
+
 void	quick_sort(int *arr, int start, int end)
 {
 	int	p;

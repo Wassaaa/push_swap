@@ -6,11 +6,21 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:57:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/07 16:32:27 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 01:44:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+
+void	free_stack(t_stack *stack)
+{
+	if (stack && stack->a_top)
+		ft_lstclear(&stack->a_top, del);
+	if (stack && stack->b_top)
+		ft_lstclear(&stack->b_top, del);
+	if (stack)
+		free(stack);
+}
 
 void	del(void *content)
 {

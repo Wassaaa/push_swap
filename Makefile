@@ -7,6 +7,9 @@ M_MAIN			=	./main.c
 
 SRCS			=	args.c\
 					commands.c\
+					commands_reverse.c\
+					commands_rotate.c\
+					commands_push_swap.c\
 					debug_prints.c\
 					error.c\
 					execute.c\
@@ -22,6 +25,7 @@ SRCS			=	args.c\
 					push_to_b.c\
 					quick_sort.c\
 					seperate_args.c\
+					simulation.c\
 					single_string_args.c\
 					stack.c\
 

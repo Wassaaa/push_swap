@@ -1,5 +1,4 @@
 {
-	"editor.formatOnSave": true,
 	"files.associations": {
 		"stdio.h": "c",
 		"unistd.h": "c",

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 00:22:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 01:46:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,3 @@ t_rot	find_best_rotation(t_stack *stack, int b_index)
 	}
 	return (best);
 }
-
-// t_rot	find_best_rotation(t_stack *stack, int b_index)
-// {
-// 	int		a_index;
-// 	t_rot	rot[4];
-// 	t_rot	best;
-
-// 	a_index = find_insert_spot(stack, b_index);
-// 	get_rotations(stack, a_index, b_index, rot);
-// 	best = rot[0];
-// 	best = best_rot(rot, best);
-// 	return (best);
-// }

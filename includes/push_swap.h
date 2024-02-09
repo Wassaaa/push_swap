@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 00:31:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/09 02:10:04 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		quick_sort(int *arr, int start, int end);
 void		construct_stack(t_input *input, t_stack *stack);
 void		handle_less(t_stack *stack, t_input *input, t_parts *p);
 
-/*PUSH TO B*/
+/*PUSH TO B TO A*/
 void		pa(t_stack *stack, int print);
 void		pb(t_stack *stack, int print);
 void		ra(t_stack *stack, int print);
@@ -114,10 +114,16 @@ void		sb(t_stack *stack, int print);
 int			is_sorted(t_list *list, int min);
 void		sort_three(t_stack *stack, t_input *input, t_parts *p);
 t_list		*pluck_first(t_list **lst);
+t_list		*pluck_last(t_list **lst);
 void		push_l_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_h_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_b_to_a(t_stack *stack, t_input *input);
 void		b_to_a_high(t_stack *stack, t_input *input);
+void		free_stack(t_stack *stack);
+void		del(void *content);
+
+/*SIM*/
+t_rot		*evaluate_moves(t_stack *stack, t_input *input);
 
 /*ROTATIONS*/
 t_rot		find_best_rotation(t_stack *stack, int b_index);
