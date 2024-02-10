@@ -7,9 +7,9 @@
 		{
 			"type": "lldb",
 			"request": "launch",
-			"name": "3 + 1",
+			"name": "fixed args",
 			"program": "${workspaceFolder}/push_swap",
-			"args": ["1","3","2"],
+			"args": ["1","3","7","2","4","9","11","12","23","15","5","6"],
 			"cwd": "${workspaceFolder}"
 		},
 	  {

@@ -6,7 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 22:58:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 23:01:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 20:07:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <push_swap.h>
+
+int	main(int argc, char **argv)
+{
+	return (0);
+}

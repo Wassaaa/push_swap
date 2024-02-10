@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:54:33 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 20:45:56 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 19:49:58 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 	push_l_to_b(&stack, &input, &p);
 	push_h_to_b(&stack, &input, &p);
 	handle_less(&stack, &input);
+	setup_imod(&input);
 	if (input.nr_count <= MAX_CRAZY_MODE)
 		push_b_to_a(&stack, &input);
 	else

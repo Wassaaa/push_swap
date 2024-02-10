@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:35:59 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 20:42:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 19:44:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_rot	best_rot(t_rot *rot, t_rot best)
 	return (best);
 }
 
-t_rot	find_best_rotation(t_stack *stack, int b_index)
+t_rot	find_best_rotation(t_stack *stack, int b_index, int i_mod)
 {
 	int		a_index;
 	t_rot	rot[4];
@@ -84,11 +84,14 @@ t_rot	find_best_rotation(t_stack *stack, int b_index)
 	b_size = ft_lstsize(stack->b_top);
 	while (++b_index < b_size)
 	{
-		best = best_rot(rot, best);
-		if (best.cost <= GOOD_ENOUGH)
-			return (best);
-		a_index = find_insert_spot(stack, b_index);
-		get_rotations(stack, a_index, b_index, rot);
+		if (b_index < i_mod || b_index > b_size - i_mod)
+		{
+			best = best_rot(rot, best);
+			if (best.cost <= GOOD_ENOUGH)
+				return (best);
+			a_index = find_insert_spot(stack, b_index);
+			get_rotations(stack, a_index, b_index, rot);
+		}
 	}
 	return (best);
 }

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 03:40:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 20:05:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,35 @@ t_rot	final_rot(t_stack *stack, t_input *input)
 	return (rot);
 }
 
+void	fix_sim_len(t_input *input)
+{
+	if (input->sim_len > SIM_LEN)
+		input->sim_len = SIM_LEN;
+	else
+		input->sim_len++;
+}
+
+void	setup_imod(t_input *input)
+{
+	input->i_mod = INDEX_MOD;
+	if (input->nr_count / 6 > input->i_mod)
+		input->i_mod = input->nr_count / 6;
+}
+
 void	push_b_to_a(t_stack *stack, t_input *input)
 {
 	t_rot	*my_moves;
 	int		i;
 
-	input->b_n = ft_lstsize(stack->b_top);
-	input->b_counter = input->b_n;
-	while (stack->b_top != NULL)
+	input->sim_len = ft_lstsize(stack->b_top);
+	input->b_counter = input->sim_len;
+	input->best_cost = INT_MAX;
+	while (input->b_counter > 0)
 	{
-		input->best_cost = INT_MAX;
-		if (input->b_n > SIM_LEN)
-			input->b_n = SIM_LEN;
-		else
-			input->b_n++;
+		fix_sim_len(input);
 		my_moves = evaluate_moves(stack, input);
 		i = 0;
-		while (i < input->b_n)
+		while (i < input->sim_len)
 		{
 			exec(my_moves[i], stack, 1);
 			pa(stack, 1);
@@ -65,8 +77,8 @@ void	push_b_to_a(t_stack *stack, t_input *input)
 		}
 		free(my_moves);
 		my_moves = NULL;
-		input->b_counter -= input->b_n;
-		input->b_n = input->b_counter;
+		input->b_counter -= input->sim_len;
+		input->sim_len = input->b_counter;
 	}
 }
 
@@ -76,7 +88,7 @@ void	b_to_a_high(t_stack *stack, t_input *input)
 
 	while (stack->b_top != NULL)
 	{
-		best = find_best_rotation(stack, 0);
+		best = find_best_rotation(stack, 0, input->i_mod);
 		exec(best, stack, 1);
 		pa(stack, 1);
 	}

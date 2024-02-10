@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 03:41:26 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 20:58:51 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SIM_LEN 120
 # define GOOD_ENOUGH 3
 # define MAX_CRAZY_MODE 120
-# define INDEX_MOD 9
+# define INDEX_MOD 15
 
 # define SUCCESS 0
 # define FAIL 1
@@ -65,7 +65,8 @@ typedef struct s_input
 	int		b_counter;
 	int		current_cost;
 	int		best_cost;
-	int		b_n;
+	int		sim_len;
+	int		i_mod;
 }			t_input;
 
 typedef struct s_rot
@@ -120,6 +121,7 @@ t_list		*pluck_first(t_list **lst);
 t_list		*pluck_last(t_list **lst);
 void		push_l_to_b(t_stack *stack, t_input *input, t_parts *p);
 void		push_h_to_b(t_stack *stack, t_input *input, t_parts *p);
+void		setup_imod(t_input *input);
 void		push_b_to_a(t_stack *stack, t_input *input);
 void		b_to_a_high(t_stack *stack, t_input *input);
 void		free_stack(t_stack *stack);
@@ -129,7 +131,7 @@ void		del(void *content);
 t_rot		*evaluate_moves(t_stack *stack, t_input *input);
 
 /*ROTATIONS*/
-t_rot		find_best_rotation(t_stack *stack, int b_index);
+t_rot		find_best_rotation(t_stack *stack, int b_index, int i_mod);
 void		both_up(int a_idx, int b_idx, t_rot *rot);
 void		both_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void		up_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
