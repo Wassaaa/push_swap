@@ -6,40 +6,43 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:22:52 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/08 18:28:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 23:40:16 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	rra(t_stack *stack, int print)
+int	rra(t_stack *stack, int print)
 {
 	t_list	*plucked;
 
 	if (stack == NULL || stack->a_top == NULL || stack->a_top->next == NULL)
-		return ;
+		return (1);
 	plucked = pluck_last(&stack->a_top);
 	ft_lstadd_front(&stack->a_top, plucked);
 	if (print)
 		print_output(RRA, stack);
+	return (1);
 }
 
-void	rrb(t_stack *stack, int print)
+int	rrb(t_stack *stack, int print)
 {
 	t_list	*plucked;
 
 	if (stack == NULL || stack->b_top == NULL || stack->b_top->next == NULL)
-		return ;
+		return (1);
 	plucked = pluck_last(&stack->b_top);
 	ft_lstadd_front(&stack->b_top, plucked);
 	if (print)
 		print_output(RRB, stack);
+	return (1);
 }
 
-void	rrr(t_stack *stack, int print)
+int	rrr(t_stack *stack, int print)
 {
 	rra(stack, 0);
 	rrb(stack, 0);
 	if (print)
 		print_output(RRR, stack);
+	return (1);
 }

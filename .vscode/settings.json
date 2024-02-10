@@ -4,6 +4,7 @@
 		"unistd.h": "c",
 		"limits.h": "c",
 		"push_swap.h": "c",
+		"push_swap_bonus.h": "c",
 		"memory": "c",
 		"utility": "c",
 		"libft.h": "c",

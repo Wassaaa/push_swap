@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 23:46:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 23:46:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
 # include <libft.h>
 # include <limits.h>
+# include <get_next_line_bonus.h>
 
 # define SHOW_STACKS 0
 # define SIM_LEN 120
@@ -108,8 +109,8 @@ t_list		*find_max(t_list *a);
 int			find_min(t_list *list);
 
 /*PUSH TO B TO A*/
-int			pa(t_stack *stack, int print);
 int			pb(t_stack *stack, int print);
+int			pa(t_stack *stack, int print);
 int			ra(t_stack *stack, int print);
 int			rb(t_stack *stack, int print);
 int			rr(t_stack *stack, int print);
