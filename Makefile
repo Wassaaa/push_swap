@@ -169,13 +169,21 @@ VG_LOG_FLAGS = --log-file=$(VG_LOG) \
 # VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..11).to_a.shuffle.join(' ')")
 # VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..20).to_a.shuffle.join(' ')")
 # VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..50).to_a.shuffle.join(' ')")
-VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..100).to_a.shuffle.join(' ')")
+# VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..100).to_a.shuffle.join(' ')")
 #VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..500).to_a.shuffle.join(' ')")
 # VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..1000).to_a.shuffle.join(' ')")
 # VG_TARGET = ./push_swap  $(shell ruby -e "puts (1..10000).to_a.shuffle.join(' ')")
+VG_TARGET = @args=$$(ruby -e "\
+		require 'set'; \
+		nums = Set.new; \
+		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
+			do nums.add(rand(-10000..10000)) \
+		end; \
+		puts nums.to_a.join(' ')"); \
+		$(VG) $(VG_FLAGS) ./push_swap $$args
 
 vg: vg_build
-	$(VG) $(VG_FLAGS) $(VG_TARGET)
+	$(VG_TARGET)
 
 vglog: vg_build
 	$(VG) $(VG_LOG_FLAGS) $(VG_TARGET)

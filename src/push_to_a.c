@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 22:44:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 03:40:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_rot	final_rot(t_stack *stack, t_input *input)
 		rot.rra = a_n - i;
 	else
 		rot.ra = i;
+	rot.cost = rot.rra + rot.ra;
 	return (rot);
 }
 
@@ -46,6 +47,7 @@ void	push_b_to_a(t_stack *stack, t_input *input)
 	int		i;
 
 	input->b_n = ft_lstsize(stack->b_top);
+	input->b_counter = input->b_n;
 	while (stack->b_top != NULL)
 	{
 		input->best_cost = INT_MAX;
@@ -63,6 +65,8 @@ void	push_b_to_a(t_stack *stack, t_input *input)
 		}
 		free(my_moves);
 		my_moves = NULL;
+		input->b_counter -= input->b_n;
+		input->b_n = input->b_counter;
 	}
 }
 

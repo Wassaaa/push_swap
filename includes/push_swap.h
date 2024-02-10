@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 22:54:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 03:41:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define SIM_LEN 120
 # define GOOD_ENOUGH 3
 # define MAX_CRAZY_MODE 120
+# define INDEX_MOD 9
 
 # define SUCCESS 0
 # define FAIL 1
@@ -61,6 +62,7 @@ typedef struct s_input
 	char	*args;
 	int		*control;
 	int		nr_count;
+	int		b_counter;
 	int		current_cost;
 	int		best_cost;
 	int		b_n;
