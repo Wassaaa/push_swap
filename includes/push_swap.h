@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:31:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 22:14:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 22:28:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SIM_LEN 120
 # define GOOD_ENOUGH 3
 # define MAX_CRAZY_MODE 120
-# define INDEX_MOD 20
+# define INDEX_MOD 10
 
 # define SUCCESS 0
 # define FAIL 1
@@ -133,7 +133,7 @@ void		del(void *content);
 t_rot		*evaluate_moves(t_stack *stack, t_input *input);
 
 /*ROTATIONS*/
-t_rot		find_best_rotation(t_stack *stack, int b_index, int i_mod);
+t_rot		find_best_rotation(t_stack *stack, int b_index);
 void		both_up(int a_idx, int b_idx, t_rot *rot);
 void		both_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);
 void		up_down(t_stack *stack, int a_idx, int b_idx, t_rot *rot);

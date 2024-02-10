@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:42:29 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 20:05:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 22:26:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	b_to_a_high(t_stack *stack, t_input *input)
 
 	while (stack->b_top != NULL)
 	{
-		best = find_best_rotation(stack, 0, input->i_mod);
+		best = find_best_rotation(stack, 0);
 		exec(best, stack, 1);
 		pa(stack, 1);
 	}

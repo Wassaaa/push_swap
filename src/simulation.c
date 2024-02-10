@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 01:34:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 19:45:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 22:27:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ static void	ten_moves_ahead(t_stack *stack, int b_index, t_input *in, t_rot *r)
 	current = copy_stack(stack);
 	if (!current)
 		crash(FAIL, stack, in);
-	best = find_best_rotation(current, b_index, in->i_mod);
+	best = find_best_rotation(current, b_index);
 	exec(best, current, 0);
 	pa(current, 0);
 	in->current_cost += add_to_rot(r, best, &i);
 	while (current->b_top != NULL && i < in->sim_len)
 	{
-		best = find_best_rotation(current, 0, in->i_mod);
+		best = find_best_rotation(current, 0);
 		in->current_cost += add_to_rot(r, best, &i);
 		exec(best, current, 0);
 		pa(current, 0);
@@ -98,14 +98,14 @@ t_rot	*evaluate_moves(t_stack *stack, t_input *input)
 	{
 		if (index < input->i_mod || index > input->b_counter - input->i_mod)
 		{
-			rots.new = ft_calloc(input->sim_len, sizeof(t_rot));
-			if (!rots.new)
-				crash(FAIL, stack, input);
-			ten_moves_ahead(stack, index, input, rots.new);
-			update_best(&rots, input);
+	rots.new = ft_calloc(input->sim_len, sizeof(t_rot));
+	if (!rots.new)
+		crash(FAIL, stack, input);
+	ten_moves_ahead(stack, index, input, rots.new);
+	update_best(&rots, input);
 		}
-		current_b = current_b->next;
-		index++;
+	current_b = current_b->next;
+	index++;
 	}
 	return (rots.best);
 }
