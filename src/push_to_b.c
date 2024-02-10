@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 18:39:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 22:04:26 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/10 22:03:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	is_breakpoint(int content, t_parts *p, t_input *input)
 {
-	if (content == input->control[p->min])
+	if (content == input->control[p->max])
 		return (1);
 	if (content == input->control[p->second])
 		return (1);
 	if (content == input->control[p->third])
 		return (1);
-	if (content == input->control[p->mid])
+	if (content == input->control[p->fourth])
 		return (1);
-	if (content == input->control[p->max])
+	if (content == input->control[p->min])
 		return (1);
 	return (0);
 }
