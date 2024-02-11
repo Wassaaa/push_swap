@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   seperate_args_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 00:03:37 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/11 00:40:41 by aklein           ###   ########.fr       */
+/*   Created: 2024/02/07 00:15:37 by aklein            #+#    #+#             */
+/*   Updated: 2024/02/11 00:41:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include <push_swap_bonus.h>
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <libft.h>
+void	seperate_args(t_input *input, char **argv)
+{
+	int	i;
+	int	nb;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-# define MAX_FD 1024
-
-int		new_strlen(const char *str);
-char	*get_next_line(int fd);
-char	*append_str_to_str(char *str, char *src, int len);
-
-#endif
+	i = 0;
+	while (i < input->nr_count)
+	{
+		if (!checks_before_atol(argv[i + 1], ft_strlen(argv[i + 1])))
+			b_crash(FAIL, NULL, input);
+		nb = ft_atol(argv[i + 1]);
+		add_to_arrays(input, nb, &i);
+		i++;
+	}
+}

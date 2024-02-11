@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   debug_prints_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 00:03:37 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/11 00:40:41 by aklein           ###   ########.fr       */
+/*   Created: 2024/02/04 18:29:17 by aklein            #+#    #+#             */
+/*   Updated: 2024/02/11 01:23:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include <push_swap_bonus.h>
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <libft.h>
+static void	print_content(void *content)
+{
+	ft_putnbr_fd(*(int *)content, 1);
+	ft_putchar_fd(' ', 1);
+}
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-# define MAX_FD 1024
-
-int		new_strlen(const char *str);
-char	*get_next_line(int fd);
-char	*append_str_to_str(char *str, char *src, int len);
-
-#endif
+void	print_current_stacks(t_stack *stack)
+{
+	ft_putstr_fd("A_: ", 1);
+	ft_lstiter(stack->a_top, print_content);
+	ft_putstr_fd("\nB_: ", 1);
+	ft_lstiter(stack->b_top, print_content);
+	ft_putstr_fd("\n\n", 1);
+}

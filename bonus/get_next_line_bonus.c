@@ -6,11 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 00:03:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 22:41:51 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/11 00:39:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include <get_next_line_bonus.h>
 
 static char	*free_and_exit(char *next_line)
 {
@@ -44,7 +44,7 @@ static char	*build_line(char *next_line, char *buffer, char *nl_ptr)
 	else
 	{
 		next_line = append_str_to_str(next_line, buffer, nl_ptr - buffer + 1);
-		bytes_to_move = ft_strlen(nl_ptr + 1) + 1;
+		bytes_to_move = new_strlen(nl_ptr + 1) + 1;
 	}
 	ft_memmove(buffer, nl_ptr + 1, bytes_to_move);
 	if (!next_line)

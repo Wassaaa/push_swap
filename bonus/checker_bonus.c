@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 00:03:37 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/11 00:40:41 by aklein           ###   ########.fr       */
+/*   Created: 2024/02/11 02:14:29 by aklein            #+#    #+#             */
+/*   Updated: 2024/02/11 02:14:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include <push_swap_bonus.h>
 
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <libft.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-# define MAX_FD 1024
-
-int		new_strlen(const char *str);
-char	*get_next_line(int fd);
-char	*append_str_to_str(char *str, char *src, int len);
-
-#endif
+int	is_sorted(t_list *stack)
+{
+	if (stack == NULL)
+		return (1);
+	while (stack->next)
+	{
+		if (*(int *)stack->content > *(int *)stack->next->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}

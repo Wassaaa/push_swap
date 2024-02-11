@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 00:03:40 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 22:42:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/11 00:39:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include <get_next_line_bonus.h>
 
-int	ft_strlen(const char *str)
+int	new_strlen(const char *str)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ char	*append_str_to_str(char *str, char *src, int len)
 	char	*new_str;
 	int		i;
 
-	new_str = malloc(len + ft_strlen(str) + 1);
+	new_str = malloc(len + new_strlen(str) + 1);
 	if (!new_str)
 	{
 		free(str);
