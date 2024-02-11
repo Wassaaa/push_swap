@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/11 05:08:26 by aklein            #+#    #+#              #
+#    Updated: 2024/02/11 05:14:09 by aklein           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 INCLUDES		=	./includes
 
 SRCS			=	args.c\
@@ -38,18 +50,26 @@ B_SRCS			=	args_bonus.c\
 					single_string_args_bonus.c\
 
 
+################################################################################
+# COMPILATION
+################################################################################
 CC				=	gcc
 CC_STRICT		=	-Wall -Wextra -Werror
 CC_DEBUG		=	-g #-fsanitize=leak
 CC_INCLUDES		=	-I $(LIBFT_INCLUDES) -I $(INCLUDES)
 CC_FULL			=	$(CC) $(CC_STRICT) $(CC_INCLUDES) $(CC_DEBUG)
 
+################################################################################
+# LIBFT
+################################################################################
 
 LIBFT			=	./libft/libft.a
 LIBFT_DIR		=	./libft
 LIBFT_INCLUDES	=	./libft
 
-
+################################################################################
+# MANDATORY
+################################################################################
 NAME			=	push_swap
 SRC_DIR			=	./src
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
@@ -60,7 +80,9 @@ M_HEADER		=	$(INCLUDES)/push_swap.h
 M_ARCHIVE		=	$(ARCHIVES)/push_swap.a
 M_ARCHIVES		=	$(M_ARCHIVE) $(LIBFT)
 
-
+################################################################################
+# BONUS
+################################################################################
 B_NAME			= 	checker
 B_DIR			=	./bonus
 B_OBJECTS		=	$(addprefix $(OBJ_DIR)/, $(B_SRCS:%.c=%.o))
@@ -68,6 +90,10 @@ B_MAIN			=	./main_bonus.c
 B_HEADER		=	$(INCLUDES)/push_swap_bonus.h
 B_ARCHIVE		=	$(ARCHIVES)/checker.a
 B_ARCHIVES		=	$(B_ARCHIVE) $(LIBFT)
+
+################################################################################
+# RULES
+################################################################################
 
 all: $(NAME)
 
@@ -98,65 +124,54 @@ $(OBJ_DIR)/%.o: $(B_DIR)/%.c
 					mkdir -p $(@D)
 					$(CC_FULL) -c $< -o $@
 
-leaks: $(NAME)
-	@echo "Checking for leaks (100 random numbers)..."
-	@args=$$(ruby -e "\
-		require 'set'; \
-		nums = Set.new; \
-		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
-			do nums.add(rand(-10000..10000)) \
-		end; \
-		puts nums.to_a.join(' ')"); \
-	leaks --atExit -- ./$(NAME) $$args
-
-tests: $(NAME)
-	@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
-	@args=$$(ruby -e "\
-		require 'set'; \
-		nums = Set.new; \
-		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
-			do nums.add(rand(-10000..10000)) \
-		end; \
-		puts nums.to_a.join(' ')"); \
-		echo ./push_swap $$args; \
-	./push_swap $$args > file
-
-visual: $(NAME)
-	@args=$$(ruby -e "\
-		require 'set'; \
-		nums = Set.new; \
-		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
-			do nums.add(rand(-10000..10000)) \
-		end; \
-		puts nums.to_a.join(' ')"); \
-	./push_swap $$args | ./pro_checker $$args
-
-test_check:
-	@args=$$(ruby -e "\
-		require 'set'; \
-		nums = Set.new; \
-		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
-			do nums.add(rand(-10000..10000)) \
-		end; \
-		puts nums.to_a.join(' ')"); \
-	./push_swap $$args | ./checker $$args
-
-500:
-	@echo
-
-100:
-	@echo
-
 clean:
 					rm -rf $(OBJ_DIR) $(ARCHIVES)
 					make clean -C $(LIBFT_DIR)
-					rm -rf push_swap.dSYM/
 
 fclean: clean
 					rm -f $(NAME) $(B_NAME)
-					make -C libft fclean
+					make fclean -C $(LIBFT_DIR)
 
 re: fclean all
+
+################################################################################
+# TESTING
+################################################################################
+
+leaks:
+					@echo "Checking for leaks ($(filter-out $@,$(MAKECMDGOALS)))..."
+					$(RUBY_ARGS)\
+					echo "leaks --atExit -- ./push_swap $$args\n";\
+					leaks --atExit -- ./push_swap $$args
+
+tests:
+					@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+					$(RUBY_ARGS)\
+					echo "./push_swap $$args | wc -l\n";\
+					./push_swap $$args | wc -l
+
+visual:
+					@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+					$(RUBY_ARGS)\
+					echo "./push_swap $$args | ./pro_checker $$args\n";\
+					./push_swap $$args | ./pro_checker $$args
+
+check:
+					@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+					$(RUBY_ARGS)\
+					echo "./push_swap $$args | ./checker $$args\n";\
+					./push_swap $$args | ./checker $$args
+
+$(shell seq 1 1000):	
+					@:
+
+RUBY_ARGS = @args=$$(ruby -e "\
+		require 'set'; \
+		nums = Set.new; \
+		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
+			do nums.add(rand(-10000..10000)) \
+		end; \
+		puts nums.to_a.join(' ')");\
 
 ################################################################################
 # VALGRIND
@@ -174,20 +189,17 @@ VG_LOG_FLAGS = --log-file=$(VG_LOG) \
 	--track-origins=yes \
 	--verbose
 
-VG_TARGET = @args=$$(ruby -e "\
-		require 'set'; \
-		nums = Set.new; \
-		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
-			do nums.add(rand(-10000..10000)) \
-		end; \
-		puts nums.to_a.join(' ')"); \
+LOG_VG_TARGET = $(RUBY_ARGS)\
+		$(VG) $(VG_LOG_FLAGS) ./push_swap $$args
+
+VG_TARGET = $(RUBY_ARGS)\
 		$(VG) $(VG_FLAGS) ./push_swap $$args
 
 vg: vg_build
 	$(VG_TARGET)
 
 vglog: vg_build
-	$(VG) $(VG_LOG_FLAGS) $(VG_TARGET)
+	$(LOG_VG_TARGET)
 
 vg_build: $(LIBFT) $(M_ARCHIVE)
 	$(CC_VG) \
@@ -196,6 +208,6 @@ vg_build: $(LIBFT) $(M_ARCHIVE)
 		-o $(NAME)
 
 vglog_clean: fclean
-	$(REMOVE) $(VG_LOG)
+	rm -f $(VG_LOG)
 
-.PHONY: all re clean fclean 500 100 bonus
+.PHONY: all re clean fclean bonus
