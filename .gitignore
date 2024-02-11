@@ -8,3 +8,4 @@ libft/libft.a
 push_swap_test_linux.sh
 push_swap_test.sh
 imgui.ini
+checker
