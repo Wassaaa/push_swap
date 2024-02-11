@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 05:08:26 by aklein            #+#    #+#              #
-#    Updated: 2024/02/11 05:14:09 by aklein           ###   ########.fr        #
+#    Updated: 2024/02/11 17:11:46 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,39 +139,43 @@ re: fclean all
 ################################################################################
 
 leaks:
-					@echo "Checking for leaks ($(filter-out $@,$(MAKECMDGOALS)))..."
+					@echo "Checking for leaks \
+					($(filter-out $@,$(MAKECMDGOALS)))..."
 					$(RUBY_ARGS)\
 					echo "leaks --atExit -- ./push_swap $$args\n";\
 					leaks --atExit -- ./push_swap $$args
 
 tests:
-					@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+					@echo "Generating \
+					$(filter-out $@,$(MAKECMDGOALS)) random numbers..."
 					$(RUBY_ARGS)\
 					echo "./push_swap $$args | wc -l\n";\
 					./push_swap $$args | wc -l
 
 visual:
-					@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+					@echo "Generating \
+					$(filter-out $@,$(MAKECMDGOALS)) random numbers..."
 					$(RUBY_ARGS)\
 					echo "./push_swap $$args | ./pro_checker $$args\n";\
 					./push_swap $$args | ./pro_checker $$args
 
 check:
-					@echo "Generating $(filter-out $@,$(MAKECMDGOALS)) random numbers..."
+					@echo "Generating \
+					$(filter-out $@,$(MAKECMDGOALS)) random numbers..."
 					$(RUBY_ARGS)\
 					echo "./push_swap $$args | ./checker $$args\n";\
 					./push_swap $$args | ./checker $$args
 
 $(shell seq 1 1000):	
 					@:
-
-RUBY_ARGS = @args=$$(ruby -e "\
-		require 'set'; \
-		nums = Set.new; \
-		while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
-			do nums.add(rand(-10000..10000)) \
-		end; \
-		puts nums.to_a.join(' ')");\
+					
+RUBY_ARGS		= 	@args=$$(ruby -e "\
+						require 'set'; \
+						nums = Set.new; \
+						while nums.size < $(filter-out $@,$(MAKECMDGOALS)) \
+							do nums.add(rand(-10000..10000)) \
+						end; \
+						puts nums.to_a.join(' ')");\
 
 ################################################################################
 # VALGRIND
@@ -211,3 +215,10 @@ vglog_clean: fclean
 	rm -f $(VG_LOG)
 
 .PHONY: all re clean fclean bonus
+
+################################################################################
+# NORM
+################################################################################
+
+norm: 
+	norminette $(SRC_DIR) $(B_DIR) $(INCLUDES) $(LIBFT_DIR) | grep -v "OK!" || true

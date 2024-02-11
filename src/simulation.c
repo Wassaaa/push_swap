@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 01:34:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/10 22:27:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/11 16:53:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ t_rot	*evaluate_moves(t_stack *stack, t_input *input)
 	{
 		if (index < input->i_mod || index > input->b_counter - input->i_mod)
 		{
-	rots.new = ft_calloc(input->sim_len, sizeof(t_rot));
-	if (!rots.new)
-		crash(FAIL, stack, input);
-	ten_moves_ahead(stack, index, input, rots.new);
-	update_best(&rots, input);
+			rots.new = ft_calloc(input->sim_len, sizeof(t_rot));
+			if (!rots.new)
+				crash(FAIL, stack, input);
+			ten_moves_ahead(stack, index, input, rots.new);
+			update_best(&rots, input);
 		}
-	current_b = current_b->next;
-	index++;
+		current_b = current_b->next;
+		index++;
 	}
 	return (rots.best);
 }

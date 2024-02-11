@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:23:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/11 01:14:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/02/11 16:53:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pb(t_stack *stack, int print)
 	t_list	*next;
 
 	if (stack == NULL || stack->a_top == NULL)
-		return (1) ;
+		return (1);
 	next = stack->a_top->next;
 	plucked = pluck_first(&stack->a_top);
 	stack->a_top = next;
@@ -35,7 +35,7 @@ int	pa(t_stack *stack, int print)
 	t_list	*next;
 
 	if (stack == NULL || stack->b_top == NULL)
-		return (1) ;
+		return (1);
 	next = stack->b_top->next;
 	plucked = pluck_first(&stack->b_top);
 	stack->b_top = next;
@@ -52,9 +52,9 @@ int	sa(t_stack *stack, int print)
 	t_list	*second;
 
 	if (stack == NULL || stack->a_top == NULL)
-		return (1) ;
+		return (1);
 	if (stack->a_top->next == NULL)
-		return (1) ;
+		return (1);
 	first = pluck_first(&stack->a_top);
 	second = pluck_first(&stack->a_top);
 	ft_lstadd_front(&stack->a_top, first);
@@ -70,9 +70,9 @@ int	sb(t_stack *stack, int print)
 	t_list	*second;
 
 	if (stack == NULL || stack->b_top == NULL)
-		return (1) ;
+		return (1);
 	if (stack->b_top->next == NULL)
-		return (1) ;
+		return (1);
 	first = pluck_first(&stack->b_top);
 	second = pluck_first(&stack->b_top);
 	ft_lstadd_front(&stack->b_top, first);
