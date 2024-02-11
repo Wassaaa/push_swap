@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 05:08:26 by aklein            #+#    #+#              #
-#    Updated: 2024/02/11 17:11:46 by aklein           ###   ########.fr        #
+#    Updated: 2024/02/11 17:54:59 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -222,3 +222,31 @@ vglog_clean: fclean
 
 norm: 
 	norminette $(SRC_DIR) $(B_DIR) $(INCLUDES) $(LIBFT_DIR) | grep -v "OK!" || true
+
+norm2: 
+	norminette $(SRC_DIR) $(B_DIR) $(INCLUDES) $(LIBFT_DIR)
+
+################################################################################
+# Colors
+################################################################################
+
+# Black, Red, Green, Yellow, Blue, Purple, Cyan, White
+BK = \033[0;30m
+R = \033[0;31m
+G = \033[0;32m
+Y = \033[0;33m
+B = \033[0;34m
+P = \033[0;35m
+C = \033[0;36m
+W = \033[0;37m
+# Bold
+BKB = \033[1;30m
+RB = \033[1;31m
+GB = \033[1;32m
+YB = \033[1;33m
+BB = \033[1;34m
+PB = \033[1;35m
+CB = \033[1;36m
+WB = \033[1;37m
+# Reset Color
+RC = \033[0m
