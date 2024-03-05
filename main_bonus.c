@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 22:58:55 by aklein            #+#    #+#             */
-/*   Updated: 2024/03/05 16:17:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:18:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,11 @@ void	read_and_exec(t_stack *stack, t_input *input)
 	while (line != NULL)
 	{
 		if (!exec_command(line, stack))
+		{
 			b_crash(FAIL, stack, input);
+			free(line);
+		}
+		free(line);
 		line = get_next_line(0);
 	}
 	if (is_sorted(stack->a_top))

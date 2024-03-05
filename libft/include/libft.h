@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 16:20:57 by aklein            #+#    #+#             */
-/*   Updated: 2024/03/05 16:25:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:15:47 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <get_next_line.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# define SIZE_MAX (size_t)-1
 
 typedef struct s_list
 {
