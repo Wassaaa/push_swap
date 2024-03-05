@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 00:15:49 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/11 02:11:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/03/05 15:54:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	validate_args(int argc, char **argv, t_input *input)
 {
 	input->arr = NULL;
 	if (argc < 2)
-		b_crash(SUCCESS, NULL, input);
+		b_crash(NO_ARG, NULL, input);
 	if (argc > 2)
 	{
 		input->nr_count = argc - 1;

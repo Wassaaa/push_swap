@@ -6,11 +6,11 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 05:08:26 by aklein            #+#    #+#              #
-#    Updated: 2024/02/11 17:54:59 by aklein           ###   ########.fr        #
+#    Updated: 2024/03/05 16:15:49 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-INCLUDES		=	./includes
+INCLUDES		=	./include
 
 SRCS			=	args.c\
 					commands.c\
@@ -43,8 +43,6 @@ B_SRCS			=	args_bonus.c\
 					commands_reverse_bonus.c\
 					commands_rotate_bonus.c\
 					ft_atol_bonus.c\
-					get_next_line_bonus.c\
-					get_next_line_utils_bonus.c\
 					input_control_bonus.c\
 					seperate_args_bonus.c\
 					single_string_args_bonus.c\
@@ -53,9 +51,9 @@ B_SRCS			=	args_bonus.c\
 ################################################################################
 # COMPILATION
 ################################################################################
-CC				=	gcc
+CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
-CC_DEBUG		=	-g #-fsanitize=leak
+CC_DEBUG		=	#-g #-fsanitize=leak
 CC_INCLUDES		=	-I $(LIBFT_INCLUDES) -I $(INCLUDES)
 CC_FULL			=	$(CC) $(CC_STRICT) $(CC_INCLUDES) $(CC_DEBUG)
 
@@ -65,7 +63,7 @@ CC_FULL			=	$(CC) $(CC_STRICT) $(CC_INCLUDES) $(CC_DEBUG)
 
 LIBFT			=	./libft/libft.a
 LIBFT_DIR		=	./libft
-LIBFT_INCLUDES	=	./libft
+LIBFT_INCLUDES	=	./libft/include
 
 ################################################################################
 # MANDATORY
@@ -100,14 +98,17 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(M_ARCHIVE) $(M_MAIN)
 					$(CC_FULL) $(M_MAIN) $(M_ARCHIVES) -o $(NAME)
 
-$(LIBFT):
+$(LIBFT): libft_force
 					make -C $(LIBFT_DIR)
+
+libft_force:
+					@true
 
 $(M_ARCHIVE): $(OBJECTS) 
 					mkdir -p $(@D)
 					ar rcs $(M_ARCHIVE) $(OBJECTS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(M_HEADER)
 					mkdir -p $(@D)
 					$(CC_FULL) -c $< -o $@
 
@@ -120,7 +121,7 @@ $(B_ARCHIVE): $(B_OBJECTS)
 					mkdir -p $(@D)
 					ar rcs $(B_ARCHIVE) $(B_OBJECTS)
 
-$(OBJ_DIR)/%.o: $(B_DIR)/%.c
+$(OBJ_DIR)/%.o: $(B_DIR)/%.c $(B_HEADER)
 					mkdir -p $(@D)
 					$(CC_FULL) -c $< -o $@
 
@@ -214,7 +215,7 @@ vg_build: $(LIBFT) $(M_ARCHIVE)
 vglog_clean: fclean
 	rm -f $(VG_LOG)
 
-.PHONY: all re clean fclean bonus
+.PHONY: all re clean fclean bonus libft_force
 
 ################################################################################
 # NORM
