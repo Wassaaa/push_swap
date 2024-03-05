@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 05:08:26 by aklein            #+#    #+#              #
-#    Updated: 2024/03/05 16:15:49 by aklein           ###   ########.fr        #
+#    Updated: 2024/03/05 18:35:27 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(LIBFT): libft_force
 libft_force:
 					@true
 
-$(M_ARCHIVE): $(OBJECTS) 
+$(M_ARCHIVE): $(OBJECTS)
 					mkdir -p $(@D)
 					ar rcs $(M_ARCHIVE) $(OBJECTS)
 
@@ -167,9 +167,9 @@ check:
 					echo "./push_swap $$args | ./checker $$args\n";\
 					./push_swap $$args | ./checker $$args
 
-$(shell seq 1 1000):	
+$(shell seq 1 1000):
 					@:
-					
+
 RUBY_ARGS		= 	@args=$$(ruby -e "\
 						require 'set'; \
 						nums = Set.new; \
@@ -221,10 +221,10 @@ vglog_clean: fclean
 # NORM
 ################################################################################
 
-norm: 
+norm:
 	norminette $(SRC_DIR) $(B_DIR) $(INCLUDES) $(LIBFT_DIR) | grep -v "OK!" || true
 
-norm2: 
+norm2:
 	norminette $(SRC_DIR) $(B_DIR) $(INCLUDES) $(LIBFT_DIR)
 
 ################################################################################
