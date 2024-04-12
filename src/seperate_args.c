@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 00:15:37 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/09 02:06:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/04/12 17:30:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	seperate_args(t_input *input, char **argv)
 {
-	int	i;
-	int	nb;
+	int		i;
+	long	nb;
 
 	i = 0;
 	while (i < input->nr_count)
